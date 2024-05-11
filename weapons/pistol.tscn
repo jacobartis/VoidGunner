@@ -1,11 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://1gptinr2go44"]
+[gd_scene load_steps=10 format=3 uid="uid://1gptinr2go44"]
 
 [ext_resource type="Script" path="res://weapons/weapon.gd" id="1_331g6"]
 [ext_resource type="Texture2D" uid="uid://cfmaknm8k73m2" path="res://weapons/assets/sprites/pistol.png" id="1_bjt30"]
 [ext_resource type="Texture2D" uid="uid://comojqge77jn4" path="res://weapons/assets/sprites/muzzle_flash.png" id="1_fqh88"]
+[ext_resource type="AudioStream" uid="uid://dlfkeo1d5lpis" path="res://weapons/assets/audio/pistol_reload.mp3" id="4_0sv1b"]
+[ext_resource type="AudioStream" uid="uid://brslya6870nmw" path="res://weapons/assets/audio/pistol_reload_end.mp3" id="5_hvhey"]
+[ext_resource type="AudioStream" uid="uid://d525q4ujkq24" path="res://weapons/assets/audio/pistol_shoot.mp3" id="6_oefcy"]
 
 [sub_resource type="Animation" id="Animation_pwcfp"]
 resource_name = "shoot"
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -13,7 +17,7 @@ tracks/0/path = NodePath("Sprites:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 1),
+"times": PackedFloat32Array(0, 0.1, 0.3),
 "transitions": PackedFloat32Array(0.25, 1.5, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(-15, 0), Vector2(0, 0)]
@@ -25,7 +29,7 @@ tracks/1/path = NodePath("Sprites/Flash:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -37,7 +41,7 @@ tracks/2/path = NodePath("Sprites/Flash:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.4, 1),
+"times": PackedFloat32Array(0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.0470588)]
@@ -49,7 +53,7 @@ tracks/3/path = NodePath("Sprites/Flash:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 2.79253]
@@ -61,10 +65,22 @@ tracks/4/path = NodePath("Sprites/Flash:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
+"times": PackedFloat32Array(0, 0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0.25, 0.25), Vector2(1, 1), Vector2(2, 2)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ShootSound:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_wjcju"]
@@ -129,6 +145,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ShootSound:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nnjnl"]
 _data = {
@@ -138,6 +166,7 @@ _data = {
 
 [node name="Pistol" type="Node2D"]
 script = ExtResource("1_331g6")
+fire_rate = 3.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -148,11 +177,25 @@ libraries = {
 
 [node name="Flash" type="Sprite2D" parent="Sprites"]
 visible = false
-position = Vector2(29, -10)
+position = Vector2(29, -2)
 texture = ExtResource("1_fqh88")
 
 [node name="Weapon" type="Sprite2D" parent="Sprites"]
 texture = ExtResource("1_bjt30")
 
 [node name="ProjSpawn" type="Node2D" parent="."]
-position = Vector2(31, -9)
+position = Vector2(31, 0)
+
+[node name="Reload" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_0sv1b")
+pitch_scale = 1.5
+
+[node name="ReloadEnd" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_hvhey")
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_oefcy")
+volume_db = -20.0
+pitch_scale = 2.0
+
+[connection signal="is_left" from="." to="Sprites/Weapon" method="set_flip_v"]
