@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhf2f1tnnssf1"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_2kb2s"]
+[ext_resource type="Texture2D" uid="uid://craxj8mn506fr" path="res://icon.svg" id="2_lbx7p"]
+[ext_resource type="Script" path="res://player/hand.gd" id="3_4wxi1"]
+[ext_resource type="PackedScene" uid="uid://1gptinr2go44" path="res://weapons/pistol.tscn" id="3_6t5yx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o1a0m"]
+size = Vector2(84, 76)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_2kb2s")
+node_gap = 50.0
+activation_delay = 5
+trail_length = 100
+
+[node name="Body" type="Sprite2D" parent="."]
+scale = Vector2(0.65625, 0.609375)
+texture = ExtResource("2_lbx7p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_o1a0m")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="HandOffset" type="Node2D" parent="."]
+
+[node name="Hand" type="Node2D" parent="HandOffset"]
+script = ExtResource("3_4wxi1")
+
+[node name="Pistol" parent="HandOffset/Hand" instance=ExtResource("3_6t5yx")]
+position = Vector2(50, 3)
