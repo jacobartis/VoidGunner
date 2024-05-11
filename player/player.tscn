@@ -9,14 +9,15 @@
 [ext_resource type="Script" path="res://player/cooldown_display.gd" id="7_p4xj3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o1a0m"]
-size = Vector2(84, 76)
+size = Vector2(72, 64)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_2kb2s")
 node_gap = 50.0
 activation_delay = 5
 trail_length = 1000
-dash_cooldown = 10.0
+dash_cooldown = 5.0
+dash_speed = 2000.0
 dash_distance = 500.0
 
 [node name="Body" type="Sprite2D" parent="."]

@@ -15,7 +15,7 @@ var overlaping_goop: Array = []
 @export_category("Dash")
 @export var dashing_enabled: bool = true
 @export var dash_cooldown: float = 20
-@export var dash_speed: float = 1000
+@export var dash_speed: float = 500
 @export var dash_distance: float = 200
 
 var can_dash: bool = dashing_enabled: set=set_can_dash
@@ -49,20 +49,22 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.y = move_toward(velocity.y, 0, SPEED)
 	
-	move_and_slide()
+	var collision = move_and_slide()
 	if velocity:
 		distance_moved.emit(velocity.length()*delta)
 		distance += velocity.length()*delta
 		check_spawn()
 	if dash_dist_remaining:
 		dash_dist_remaining -= velocity.length()*delta
-		if dash_dist_remaining<=0:
+		if dash_dist_remaining<=0 or collision:
 			dash_dist_remaining = 0
 			exit_dash()
 
 func _input(event):
-	if event.is_action("player_shoot"):
+	if event.is_action_pressed("player_shoot"):
 		$HandOffset/Hand.shoot()
+	if event.is_action_pressed("player_reload"):
+		$HandOffset/Hand.reload()
 
 func enter_dash(dir):
 	dash_dir = dir
@@ -87,6 +89,6 @@ func check_spawn():
 		goop.global_position = global_position
 		goop.required_dist = node_gap*activation_delay
 		goop.despawn_dist = node_gap*trail_length
-		get_parent().add_child(goop)
+		get_tree().get_first_node_in_group("goop_home").add_child(goop)
 		distance_moved.connect(goop.add_distance)
 		distance = 0
