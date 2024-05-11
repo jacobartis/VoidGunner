@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhf2f1tnnssf1"]
+[gd_scene load_steps=9 format=3 uid="uid://dhf2f1tnnssf1"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_2kb2s"]
 [ext_resource type="Texture2D" uid="uid://craxj8mn506fr" path="res://icon.svg" id="2_lbx7p"]
 [ext_resource type="Script" path="res://player/hand.gd" id="3_4wxi1"]
 [ext_resource type="PackedScene" uid="uid://1gptinr2go44" path="res://weapons/pistol.tscn" id="3_6t5yx"]
+[ext_resource type="Texture2D" uid="uid://bmvqcoftpat8k" path="res://player/assets/charge_bar_under.png" id="5_i1crp"]
+[ext_resource type="Texture2D" uid="uid://p3ukdt28d1fy" path="res://player/assets/charge_bar.png" id="5_to3hi"]
+[ext_resource type="Script" path="res://player/cooldown_display.gd" id="7_p4xj3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o1a0m"]
 size = Vector2(84, 76)
@@ -12,7 +15,9 @@ size = Vector2(84, 76)
 script = ExtResource("1_2kb2s")
 node_gap = 50.0
 activation_delay = 5
-trail_length = 100
+trail_length = 1000
+dash_cooldown = 10.0
+dash_distance = 500.0
 
 [node name="Body" type="Sprite2D" parent="."]
 scale = Vector2(0.65625, 0.609375)
@@ -30,3 +35,25 @@ script = ExtResource("3_4wxi1")
 
 [node name="Pistol" parent="HandOffset/Hand" instance=ExtResource("3_6t5yx")]
 position = Vector2(50, 3)
+
+[node name="DashCooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="CooldownDisplay" type="TextureProgressBar" parent="." node_paths=PackedStringArray("cooldown_timer")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = 38.0
+offset_right = 16.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+step = 0.05
+fill_mode = 4
+texture_under = ExtResource("5_i1crp")
+texture_progress = ExtResource("5_to3hi")
+script = ExtResource("7_p4xj3")
+cooldown_timer = NodePath("../DashCooldown")
