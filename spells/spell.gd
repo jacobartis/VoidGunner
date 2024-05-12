@@ -1,7 +1,8 @@
-extends Node
+extends Resource
 class_name Spell
 
 @export_category("Spell Basics")
+@export var name: String = "PlaceholderSpell"
 @export var cost: float = 10
 @export var cooldown: float = 5
 

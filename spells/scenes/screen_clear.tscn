@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c70tp0cu30nms"]
-
-[ext_resource type="Script" path="res://spells/screen_damage_spell.gd" id="1_mknbd"]
-
-[node name="ScreenClear" type="Node"]
-script = ExtResource("1_mknbd")
-damage = 100.0
