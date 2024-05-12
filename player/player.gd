@@ -5,7 +5,7 @@ signal health_update(value)
 signal max_health_update(value)
 signal madness_update(value)
 
-@export_category("Goop")
+@export_category("Madness")
 @export var node_gap: float = 100
 @export var activation_delay: int = 3
 @export var trail_length: int = 20
@@ -53,12 +53,14 @@ func add_knowlage(val):
 	KnowlageShop.add_knowlage(val*(knowlage_mult*madness/100))
 
 func get_spell_manager():
-	return $SpellDisplay
+	return $SpellManager
 
 func get_hand():
-	return %hand
+	return %Hand
 
 func _ready():
+	if KnowlageShop.player_stats:
+		KnowlageShop.player_stats.load_stats(self)
 	max_health = max_health
 	health = health
 	madness = madness
@@ -99,6 +101,12 @@ func _input(event):
 		%Hand.reload()
 	if event.is_action_pressed("player_cast"):
 		$SpellManager.cast_current()
+	if event.is_action_pressed("debug_toggle_shop"):
+		add_knowlage(50)
+		var stats = PlayerStats.new()
+		stats.save_stats(self)
+		KnowlageShop.player_stats = stats
+		get_tree().change_scene_to_file("res://library/library_shop.tscn")
 
 func enter_dash(dir):
 	dash_dir = dir
