@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjykwgdtmgk6e"]
+
+[ext_resource type="Script" path="res://spells/heal_spell.gd" id="1_kxbd5"]
+
+[node name="LesserHeal" type="Node"]
+script = ExtResource("1_kxbd5")
+cooldown = 60.0

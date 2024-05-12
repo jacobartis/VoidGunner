@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://0birx0i1wpnh"]
+
+[ext_resource type="Script" path="res://spells/shoot_spell.gd" id="1_i35d7"]
+[ext_resource type="PackedScene" uid="uid://bpmmid6ojjj2l" path="res://projectiles/shot.tscn" id="2_0fr21"]
+
+[node name="ShotgunSpell" type="Node"]
+script = ExtResource("1_i35d7")
+quantity = 5
+max_angle = 45.0
+shot_packed = ExtResource("2_0fr21")
+shot_speed = 500.0
+shot_damage = 2
+cost = 20.0
+cooldown = 15.0

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://58qh16ficgug"]
+
+[ext_resource type="Script" path="res://spells/heal_spell.gd" id="1_e58pj"]
+
+[node name="GreaterHeal" type="Node"]
+script = ExtResource("1_e58pj")
+heal_amount = 100.0
+cost = 20.0
+cooldown = 60.0

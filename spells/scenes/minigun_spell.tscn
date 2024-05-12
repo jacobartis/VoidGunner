@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://8l7frjfosjl8"]
+
+[ext_resource type="Script" path="res://spells/shoot_spell.gd" id="1_wequ5"]
+[ext_resource type="PackedScene" uid="uid://bpmmid6ojjj2l" path="res://projectiles/shot.tscn" id="2_sdddr"]
+
+[node name="MinigunSpell" type="Node"]
+script = ExtResource("1_wequ5")
+quantity = 30
+max_angle = 30.0
+delay_between = 0.1
+shot_packed = ExtResource("2_sdddr")
+shot_speed = 800.0
+cost = 20.0
+cooldown = 15.0
