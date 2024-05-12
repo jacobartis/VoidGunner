@@ -15,18 +15,6 @@ func add_spell(spell):
 		spells.pop_front()
 	spells.append(spell)
 
-func _ready():
-	var spell
-	for x in range(2):
-		print(x)
-		if x == 0:
-			spell = preload("res://spells/scenes/minigun_spell.tscn").instantiate()
-		elif x == 1: 
-			spell = preload("res://spells/scenes/screen_clear.tscn").instantiate()
-		add_spell(spell)
-	new_spell_selected.emit(spells[current_spell])
-	print(spells)
-
 func _process(delta):
 	for spell in spells:
 		spell.process(delta)
