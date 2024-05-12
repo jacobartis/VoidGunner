@@ -1,4 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://80cqroifpud1"]
+[gd_scene load_steps=4 format=3 uid="uid://80cqroifpud1"]
+
+[ext_resource type="Script" path="res://library/shop_controller.gd" id="1_6ur0b"]
+[ext_resource type="Script" path="res://library/item_spawn.gd" id="2_ro08d"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_txc57"]
 font_size = 64
@@ -8,21 +11,57 @@ shadow_size = 10
 shadow_color = Color(0.164706, 0.164706, 0.164706, 0.776471)
 shadow_offset = Vector2(-5, 5)
 
-[node name="LibraryShop" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="LibraryShop" type="Node2D"]
+script = ExtResource("1_6ur0b")
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -375.0
+offset_right = 375.0
 offset_bottom = 88.0
 grow_horizontal = 2
 text = "Library (Knowlage Shop)"
 label_settings = SubResource("LabelSettings_txc57")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BuyButton" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = -1
+anchor_left = 0.448
+anchor_top = 0.775
+anchor_right = 0.552
+anchor_bottom = 0.823
+offset_left = -0.0960083
+offset_top = -0.200012
+offset_right = 0.0959473
+offset_bottom = -0.304016
+grow_horizontal = 2
+grow_vertical = 2
+text = "Buy"
+
+[node name="ItemSpawn" type="Node2D" parent="." groups=["ItemSpawn"]]
+position = Vector2(-282, 100)
+script = ExtResource("2_ro08d")
+
+[node name="ItemSpawn2" type="Node2D" parent="." groups=["ItemSpawn"]]
+position = Vector2(-38, 115)
+script = ExtResource("2_ro08d")
+item_type = 1
+
+[node name="ItemSpawn3" type="Node2D" parent="." groups=["ItemSpawn"]]
+position = Vector2(248, 102)
+script = ExtResource("2_ro08d")
+item_type = 2
+
+[connection signal="pressed" from="CanvasLayer/BuyButton" to="." method="on_buy_button_pressed"]
+[connection signal="item_selected" from="ItemSpawn" to="." method="on_item_selected"]
+[connection signal="item_selected" from="ItemSpawn2" to="." method="on_item_selected"]
+[connection signal="item_selected" from="ItemSpawn3" to="." method="on_item_selected"]
