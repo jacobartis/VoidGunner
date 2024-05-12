@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
 signal distance_moved(dist)
+signal health_update(value)
+signal max_health_update(value)
+signal madness_update(value)
 
 @export_category("Goop")
 @export var node_gap: float = 100
@@ -9,7 +12,7 @@ signal distance_moved(dist)
 @export var gain_speed: float = 1
 
 var distance = 0
-var goop_value = 0: set=set_goop_value
+var madness = 0: set=set_madness_value
 var overlaping_goop: Array = []
 
 @export_category("Dash")
@@ -22,18 +25,37 @@ var can_dash: bool = dashing_enabled: set=set_can_dash
 var dash_dist_remaining: float
 var dash_dir: Vector2
 
-const SPEED = 400.0
+@export_category("Stats")
+@export var can_take_damage: bool = true
+@export var max_health: float = 10: set=set_max_health
+@export var speed: float = 400.0
 
-func set_goop_value(val):
-	goop_value = val
-	print(val)
+var health: float = max_health: set=set_health
+
+func set_madness_value(val):
+	madness = val
+	health = health
+	madness_update.emit(madness)
+
+func set_max_health(val):
+	max_health = val
+	max_health_update.emit(max_health)
+
+func set_health(val):
+	health = clamp(val,0,max_health-(max_health/100.0)*madness)
+	health_update.emit(health)
 
 func set_can_dash(val):
 	can_dash = val and dashing_enabled
 
+func _ready():
+	max_health = max_health
+	health = health
+	madness = madness
+
 func _process(delta):
 	if overlaping_goop:
-		goop_value+=delta*gain_speed
+		madness+=delta*gain_speed
 
 func _physics_process(delta):
 	$HandOffset.look_at(get_global_mouse_position())
@@ -44,10 +66,10 @@ func _physics_process(delta):
 	if dash_dist_remaining:
 		velocity = dash_dir * dash_speed
 	elif direction:
-		velocity = direction * SPEED
+		velocity = direction * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.y = move_toward(velocity.y, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.y = move_toward(velocity.y, 0, speed)
 	
 	var collision = move_and_slide()
 	if velocity:
@@ -65,6 +87,8 @@ func _input(event):
 		$HandOffset/Hand.shoot()
 	if event.is_action_pressed("player_reload"):
 		$HandOffset/Hand.reload()
+	if event.is_action_pressed("player_cast"):
+		$SpellManager.cast_current()
 
 func enter_dash(dir):
 	dash_dir = dir
@@ -77,11 +101,18 @@ func enter_dash(dir):
 	can_dash = true
 
 func exit_dash():
-	collision_layer = 1
-	collision_mask = 1
+	collision_layer = 3
+	collision_mask = 3
 
 func hit(damage):
+	if !can_take_damage: return
 	print("ow ",damage)
+	health -= damage
+	$AnimationPlayer.play("damaged")
+	if health<=0:
+		$AnimationPlayer.play("death")
+		await $AnimationPlayer.animation_finished
+		process_mode = Node.PROCESS_MODE_DISABLED
 
 func check_spawn():
 	if distance>=node_gap:
