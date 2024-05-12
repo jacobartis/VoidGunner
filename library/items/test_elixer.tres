@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ElixerItemData" load_steps=2 format=3 uid="uid://dirkfld5m265j"]
+
+[ext_resource type="Script" path="res://library/items/elixer_data.gd" id="1_jkn3f"]
+
+[resource]
+script = ExtResource("1_jkn3f")
+max_health = 0.0
+speed = 100.0
+dash_cooldown = 0.0
+dash_speed = 0.0
+dash_distance = 0.0
+node_gap = 0.0
+activation_delay = 0
+trail_length = 0
+knowlage_mult = 0.0
+gain_speed = 0.0
+item_name = "Text Elixer"
+price = 100
+min_rarity = 0
