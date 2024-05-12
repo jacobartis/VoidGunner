@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://b52hag1acxf5v"]
+
+[ext_resource type="Script" path="res://library/item.gd" id="1_jlm74"]
+[ext_resource type="Texture2D" uid="uid://craxj8mn506fr" path="res://icon.svg" id="2_4ee8w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a7323"]
+size = Vector2(130, 155)
+
+[sub_resource type="Animation" id="Animation_j3nnr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0j6k6"]
+resource_name = "mouse_enter"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fh3v1"]
+_data = {
+"RESET": SubResource("Animation_j3nnr"),
+"mouse_action": SubResource("Animation_0j6k6")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_2sou7"]
+font_size = 32
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0.576471, 0.576471, 0.576471, 1)
+shadow_offset = Vector2(-2, 2)
+
+[node name="Item" type="Node2D"]
+script = ExtResource("1_jlm74")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_4ee8w")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -10.5)
+shape = SubResource("RectangleShape2D_a7323")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fh3v1")
+}
+
+[node name="ItemName" type="Label" parent="."]
+anchors_preset = -1
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = -123.0
+offset_right = 20.0
+offset_bottom = -100.0
+grow_horizontal = 2
+label_settings = SubResource("LabelSettings_2sou7")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
