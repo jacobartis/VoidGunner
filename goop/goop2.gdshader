@@ -1,21 +1,38 @@
 shader_type canvas_item;
 
-uniform sampler2D screen_texture : hint_screen_texture, filter_nearest_mipmap, repeat_enable;
+const vec2 center =  vec2(0.5,0.5);
+uniform float intensity : hint_range(0.0, 20.0) = 9.14159265359;
+varying float angle;
+varying float time;
+uniform float radius : hint_range(0.0, 1.0) = 0.5;
 
-uniform float alpha : hint_range(0.0, 1.0);
-uniform float scale : hint_range(1.0, 2.0);
-uniform float border_mask: hint_range(0.0, 5.0) = 2.0;
-uniform float strength : hint_range(0, 25);
+//loops through the sprite top to bottom, left to right pixel by pixel
+void fragment(){
+    // Get the current UV coordinates
+    vec2 uv = UV;
 
-void fragment() {
-	float scale_reverse = 2.0 - scale;
-	vec2 uvs = SCREEN_UV * scale_reverse + vec2(1.0 - scale_reverse)/2.;
-	
-	vec2 mask = pow(2.0 * abs(UV - 0.5), vec2(border_mask));
-	
-	float r = texture(screen_texture, (uvs + vec2(SCREEN_PIXEL_SIZE * strength) * mask), 0.0).r;
-	float g = texture(screen_texture, (uvs + vec2(SCREEN_PIXEL_SIZE) * mask), 0.0).g;
-	float b = texture(screen_texture, (uvs + vec2(SCREEN_PIXEL_SIZE * strength) *mask), 0.0).b;
-	
-	COLOR = vec4(r, g, b, alpha);
+//Ignoring the outbound zone
+if(length(center - uv) > radius ) {
+COLOR = texture(TEXTURE, UV);
+}
+
+//Real work section
+else{
+time  = abs( cos(TIME * 1.0) );
+//Wrip effect making the angle relative to the distance to the center
+angle = intensity * (length(center - uv) - sqrt(0.5)) * time;
+
+
+    // Rotate the UV coordinates around the center of the sprite
+    uv -= vec2(0.5, 0.5);
+    uv = vec2(
+        uv.x * cos(angle) - uv.y * sin(angle),
+        uv.x * sin(angle) + uv.y * cos(angle)
+    );
+    uv += vec2(0.5, 0.5);
+
+    // Output the result pixel from the original texture
+    COLOR = texture(TEXTURE, uv);
+}
+
 }

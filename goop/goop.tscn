@@ -1,39 +1,76 @@
-[gd_scene load_steps=19 format=3 uid="uid://bejrrqtopts6j"]
+[gd_scene load_steps=16 format=3 uid="uid://bejrrqtopts6j"]
 
 [ext_resource type="Script" path="res://goop/goop.gd" id="1_cbi2p"]
 [ext_resource type="Shader" path="res://goop/goop.gdshader" id="2_5h8sd"]
-[ext_resource type="Texture2D" uid="uid://y18wdl0n4fck" path="res://goop/assets/sprties/void_goop.png" id="2_oswci"]
 [ext_resource type="Texture2D" uid="uid://ca71wrlxvmfrt" path="res://particle_sprites/swirl.png" id="3_1ne34"]
-[ext_resource type="Shader" path="res://goop/goop2.gdshader" id="3_2binh"]
 [ext_resource type="Texture2D" uid="uid://biypkdnoqbfnv" path="res://particle_sprites/white_square.png" id="4_mcmdn"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_no8il"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_060xl"]
 shader = ExtResource("2_5h8sd")
-shader_parameter/alpha = 0.2
+shader_parameter/opacity = 1.0
+shader_parameter/resolution = Vector2(400, 400)
+shader_parameter/spiral_color = Color(0.756863, 0.00392157, 0.929412, 1)
+shader_parameter/frequency = 5.0
+shader_parameter/speed = 8.0
+shader_parameter/brightness = 2.0
+shader_parameter/balance = 0.62
+shader_parameter/octaves = 10.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lkj54"]
-shader = ExtResource("3_2binh")
-shader_parameter/alpha = 0.0
-shader_parameter/scale = 1.497
-shader_parameter/border_mask = 1.265
-shader_parameter/strength = 22.899
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w7qhy"]
-size = Vector2(74, 68)
+[sub_resource type="CircleShape2D" id="CircleShape2D_pnd67"]
+radius = 49.163
 
 [sub_resource type="Animation" id="Animation_f1h0g"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/path = NodePath("Area2D:monitoring")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0.498039)]
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_v3lp3"]
+resource_name = "despawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -42,73 +79,10 @@ tracks/1/path = NodePath("Sprite2D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.5, 0.5)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Area2D:monitoring")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("GPUParticles2D:emitting")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_v3lp3"]
-resource_name = "despawn"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(3, 1),
+"transitions": PackedFloat32Array(4, 1),
 "update": 0,
-"values": [Vector2(0.5, 0.5), Vector2(0.1, 0.1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(3, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.160784)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("GPUParticles2D:emitting")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"values": [Vector2(4, 4), Vector2(0.25, 0.25)]
 }
 
 [sub_resource type="Animation" id="Animation_p3056"]
@@ -117,50 +91,38 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/path = NodePath("Area2D:monitoring")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0.498039), Color(1, 1, 1, 1)]
+"update": 1,
+"values": [false, true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/path = NodePath("GPUParticles2D:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1.5, 1),
-"update": 0,
-"values": [Vector2(0.5, 0.5), Vector2(1, 1)]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Area2D:monitoring")
+tracks/2/path = NodePath("Sprite2D:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("GPUParticles2D:emitting")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector2(1, 1), Vector2(4, 4)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pmhkm"]
@@ -204,20 +166,7 @@ color_ramp = SubResource("GradientTexture1D_chdp1")
 script = ExtResource("1_cbi2p")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.498039)
-clip_children = 2
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_oswci")
-
-[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D"]
-material = SubResource("ShaderMaterial_no8il")
-scale = Vector2(2.0625, 2)
-texture = ExtResource("4_mcmdn")
-
-[node name="Sprite2D3" type="Sprite2D" parent="Sprite2D"]
-material = SubResource("ShaderMaterial_lkj54")
-position = Vector2(7.62939e-06, 0)
-scale = Vector2(2.0625, 2)
+material = SubResource("ShaderMaterial_060xl")
 texture = ExtResource("4_mcmdn")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -225,7 +174,7 @@ visible = false
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_w7qhy")
+shape = SubResource("CircleShape2D_pnd67")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -238,6 +187,7 @@ amount = 40
 process_material = SubResource("ParticleProcessMaterial_8x1hg")
 texture = ExtResource("3_1ne34")
 lifetime = 2.0
+preprocess = 2.0
 speed_scale = 1.5
 randomness = 0.25
 trail_sections = 4
