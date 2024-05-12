@@ -1,21 +1,27 @@
 extends Node2D
 
-#TODO
-#Allow weapon swapping
+var weapon :set=set_weapon 
 
-func get_weapon():
-	return $Pistol
+func set_weapon(packed_weap:PackedScene):
+	if weapon:
+		weapon.queue_free()
+	weapon = packed_weap.instantiate()
+	add_child(weapon)
+	weapon.global_position = global_position
+
+func _ready():
+	weapon = preload("res://weapons/pistol.tscn")
 
 func _process(delta):
 	if get_global_mouse_position().x<=global_position.x:
-		$Pistol.is_left.emit(true)
+		weapon.is_left.emit(true)
 	else:
-		$Pistol.is_left.emit(false)
+		weapon.is_left.emit(false)
 
 func shoot():
-	if !$Pistol:return
-	$Pistol.shoot()
+	if !weapon:return
+	weapon.shoot()
 
 func reload():
-	if !$Pistol:return
-	$Pistol.reload()
+	if !weapon:return
+	weapon.reload()
