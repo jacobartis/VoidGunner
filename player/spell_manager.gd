@@ -7,6 +7,9 @@ signal new_spell_selected(spell)
 @onready var spells = []
 var current_spell: int = 0
 
+func get_spells():
+	return spells
+
 func add_spell(spell):
 	if spells.size()>=spell_slots:
 		spells.pop_front()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dhf2f1tnnssf1"]
+[gd_scene load_steps=18 format=3 uid="uid://dhf2f1tnnssf1"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_2kb2s"]
 [ext_resource type="Texture2D" uid="uid://craxj8mn506fr" path="res://icon.svg" id="2_lbx7p"]
@@ -12,10 +12,72 @@
 [ext_resource type="Texture2D" uid="uid://bg8601dplushu" path="res://player/assets/health_bar_under.png" id="9_gs5ba"]
 [ext_resource type="Texture2D" uid="uid://mruhpsh0uuy0" path="res://player/assets/Madness_bar.png" id="10_m63dm"]
 [ext_resource type="Texture2D" uid="uid://chesawcx5f080" path="res://player/assets/health_bar.png" id="10_xgyja"]
-[ext_resource type="Script" path="res://player/spell_display.gd" id="13_wta5m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o1a0m"]
 size = Vector2(72, 64)
+
+[sub_resource type="Animation" id="Animation_f24el"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(5, 1),
+"update": 0,
+"values": [Vector2(0.65625, 0.609375), Vector2(0.65625, 0.03125)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HandOffset:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:collision_layer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:collision_mask")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_grt1e"]
 length = 0.001
@@ -143,69 +205,6 @@ tracks/2/keys = {
 "values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_f24el"]
-resource_name = "death"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Body:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(5, 1),
-"update": 0,
-"values": [Vector2(0.65625, 0.609375), Vector2(0.65625, 0.03125)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Body:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("HandOffset:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.4),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:collision_layer")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".:collision_mask")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iqsbl"]
 _data = {
 "RESET": SubResource("Animation_grt1e"),
@@ -234,14 +233,12 @@ shape = SubResource("RectangleShape2D_o1a0m")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="SpellManager" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+[node name="SpellManager" type="Node2D" parent="."]
 script = ExtResource("3_fq5d7")
-player = NodePath("..")
 
 [node name="HandOffset" type="Node2D" parent="."]
 
 [node name="Hand" type="Node2D" parent="HandOffset"]
-unique_name_in_owner = true
 script = ExtResource("3_4wxi1")
 
 [node name="Pistol" parent="HandOffset/Hand" instance=ExtResource("3_6t5yx")]
@@ -276,25 +273,24 @@ cooldown_timer = NodePath("../DashCooldown")
 
 [node name="HealthDisplay" type="Control" parent="."]
 layout_mode = 3
+anchors_preset = 0
+offset_left = -16.0
+offset_top = 38.0
+offset_right = 24.0
+offset_bottom = 78.0
+script = ExtResource("8_pfkjl")
+
+[node name="Health" type="TextureProgressBar" parent="HealthDisplay"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -49.5
-offset_top = -66.0
-offset_right = 49.5
-offset_bottom = -40.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("8_pfkjl")
-metadata/_edit_group_ = true
-
-[node name="Health" type="TextureProgressBar" parent="HealthDisplay"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 12.0
+offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 step = 0.1
@@ -303,30 +299,21 @@ texture_progress = ExtResource("10_xgyja")
 
 [node name="Madness" type="TextureProgressBar" parent="HealthDisplay"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -20.0
+offset_right = 44.0
+offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 step = 0.1
 fill_mode = 1
 texture_progress = ExtResource("10_m63dm")
 
-[node name="SpellDisplay" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = -96.0
-offset_right = 48.0
-offset_bottom = -73.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("13_wta5m")
-
 [connection signal="health_update" from="." to="HealthDisplay" method="health_change"]
 [connection signal="madness_update" from="." to="HealthDisplay" method="madness_change"]
 [connection signal="max_health_update" from="." to="HealthDisplay" method="max_health_change"]
-[connection signal="new_spell_selected" from="SpellManager" to="SpellDisplay" method="_on_spell_manager_new_spell_selected"]

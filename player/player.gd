@@ -9,6 +9,7 @@ signal madness_update(value)
 @export var node_gap: float = 100
 @export var activation_delay: int = 3
 @export var trail_length: int = 20
+@export var knowlage_mult: float = 2
 @export var gain_speed: float = 1
 
 var distance = 0
@@ -48,6 +49,15 @@ func set_health(val):
 func set_can_dash(val):
 	can_dash = val and dashing_enabled
 
+func add_knowlage(val):
+	KnowlageShop.add_knowlage(val*(knowlage_mult*madness/100))
+
+func get_spell_manager():
+	return $SpellDisplay
+
+func get_hand():
+	return %hand
+
 func _ready():
 	max_health = max_health
 	health = health
@@ -84,9 +94,9 @@ func _physics_process(delta):
 
 func _input(event):
 	if event.is_action_pressed("player_shoot"):
-		$HandOffset/Hand.shoot()
+		%Hand.shoot()
 	if event.is_action_pressed("player_reload"):
-		$HandOffset/Hand.reload()
+		%Hand.reload()
 	if event.is_action_pressed("player_cast"):
 		$SpellManager.cast_current()
 
@@ -123,3 +133,6 @@ func check_spawn():
 		get_tree().get_first_node_in_group("goop_home").add_child(goop)
 		distance_moved.connect(goop.add_distance)
 		distance = 0
+
+func on_entering_shop():
+	KnowlageShop.set_player(self)
