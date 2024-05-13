@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsis8o24qjpgk"]
+[gd_scene load_steps=9 format=3 uid="uid://bsis8o24qjpgk"]
 
 [ext_resource type="Script" path="res://projectiles/projectile.gd" id="1_o6tbx"]
 
@@ -94,10 +94,15 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_x4qq3"]
+resource_name = "despawn"
+length = 0.5
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l4l0d"]
 _data = {
 "RESET": SubResource("Animation_drxlm"),
-"attack": SubResource("Animation_af6it")
+"attack": SubResource("Animation_af6it"),
+"despawn": SubResource("Animation_x4qq3")
 }
 
 [node name="Melee" type="Node2D"]

@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://csi8bbhyw3ope"]
+
+[ext_resource type="Script" path="res://projectiles/projectile.gd" id="1_ga4na"]
+[ext_resource type="Texture2D" uid="uid://d3ujysh87tmyk" path="res://projectiles/assets/sprites/shot.png" id="3_o1ado"]
+[ext_resource type="Script" path="res://projectiles/effects/spawn_shot.gd" id="4_i8ymu"]
+[ext_resource type="PackedScene" uid="uid://cpbiji4meeww2" path="res://projectiles/explosion.tscn" id="5_pol1b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nodli"]
+radius = 18.0
+
+[node name="ExplodingShot" type="Node2D"]
+script = ExtResource("1_ga4na")
+life_time = 1.0
+pierce = 9000
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.59375, 0.609375)
+texture = ExtResource("3_o1ado")
+
+[node name="SpawnShotEffect" type="Node2D" parent="."]
+script = ExtResource("4_i8ymu")
+shot_scene = ExtResource("5_pol1b")
+damage = 5.0
+speed = 0.0
+pierce = 200
+lifetime_override = 2.0
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_nodli")
+
+[connection signal="target_hit" from="." to="SpawnShotEffect" method="cause"]
+[connection signal="time_expired" from="." to="SpawnShotEffect" method="cause"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
