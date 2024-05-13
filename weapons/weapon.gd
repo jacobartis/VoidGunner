@@ -5,14 +5,23 @@ signal is_left(val)
 @export_category("Weapon")
 ## Fire rate in bullets per second.
 @export var fire_rate: float = 2
+@export var shots_per_attack: int = 1
+@export var max_angle: float = 0
+@export var cartrage: bool = true
+@export var auto_reload:bool = false
 @export_category("Ammo")
 @export var max_ammo: int = 6
 @export var reload_time: float = 1
-var ammo = max_ammo
+@onready var ammo = max_ammo
 var reloading: bool = false
 @export_category("Bullets")
+@export var shot_scene: PackedScene = preload("res://projectiles/shot.tscn")
 @export var damage: float = 3
 @export var speed: float = 700
+@export var speed_variance: float = 0
+@export var pierce: int = 0
+@export var lifetime_override: float = 0
+@export var speed_variation_override: CurveTexture
 
 var can_shoot: bool = true
 
@@ -22,26 +31,37 @@ func shoot():
 		reload()
 		return
 	
-	var shot = preload("res://projectiles/shot.tscn").instantiate()
-	shot.direction = Vector2.RIGHT.rotated(global_rotation)
-	shot.speed = speed
-	shot.damage = damage
-	shot.target_groups = ["enemy"]
-	get_tree().get_first_node_in_group("world").add_child(shot)
-	shot.global_position = $ProjSpawn.global_position
-	$AnimationPlayer.stop()
-	$AnimationPlayer.play("shoot")
+	for x in shots_per_attack:
+		var shot = shot_scene.instantiate()
+		shot.direction = Vector2.RIGHT.rotated(global_rotation).rotated(deg_to_rad(randf_range(-max_angle,max_angle)))
+		shot.speed = speed+randf_range(-speed_variance,speed_variance)
+		shot.damage = damage
+		shot.pierce = pierce
+		shot.target_groups = ["enemy"]
+		if lifetime_override: shot.life_time = lifetime_override
+		if speed_variation_override: shot.speed_variation = speed_variation_override
+		get_tree().get_first_node_in_group("world").add_child(shot)
+		shot.global_position = $ProjSpawn.global_position
+		$AnimationPlayer.stop()
+		$AnimationPlayer.play("shoot")
 	ammo -= 1
 	can_shoot = false
 	await get_tree().create_timer(1.0/fire_rate).timeout
 	can_shoot = true
+	
+	if ammo<=0 and auto_reload:
+		reload()
+		return
 
 func reload():
-	if reloading: return
+	if reloading or max_ammo==ammo: return
 	reloading = true
 	can_shoot = false
 	$Reload.play()
-	await get_tree().create_timer(reload_time).timeout
+	if cartrage:
+		await get_tree().create_timer(reload_time).timeout
+	else:
+		await get_tree().create_timer((reload_time/max_ammo)*max_ammo-ammo).timeout
 	$Reload.stop()
 	$ReloadEnd.play()
 	ammo = max_ammo
