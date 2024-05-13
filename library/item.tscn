@@ -118,7 +118,6 @@ libraries = {
 
 [node name="ItemName" type="Label" parent="."]
 modulate = Color(1, 1, 1, 0)
-anchors_preset = -1
 offset_left = -32.5
 offset_top = -130.0
 offset_right = 32.5
@@ -132,7 +131,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Price" type="Label" parent="."]
 modulate = Color(1, 1, 1, 0)
-anchors_preset = -1
 offset_left = -32.5
 offset_top = -18.0
 offset_right = 32.5

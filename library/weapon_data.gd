@@ -1,19 +1,19 @@
 extends ItemData
 class_name WeaponItemData
 
-var type:KnowlageShop.Types = KnowlageShop.Types.Weapon
+var type:KnowledgeShop.Types = KnowledgeShop.Types.Weapon
 @export_category("Weapon Info")
 @export var weapon_scene: PackedScene
 
-func randomize_stats(rarity:KnowlageShop.Rarities):
+func randomize_stats(rarity:KnowledgeShop.Rarities):
 	match rarity:
-		KnowlageShop.Rarities.Common:
+		KnowledgeShop.Rarities.Common:
 			item_name = "Common "+item_name
-		KnowlageShop.Rarities.Rare:
+		KnowledgeShop.Rarities.Rare:
 			item_name = "Rare "+item_name
-		KnowlageShop.Rarities.Epic:
+		KnowledgeShop.Rarities.Epic:
 			item_name = "Epic "+item_name
-		KnowlageShop.Rarities.Legendary:
+		KnowledgeShop.Rarities.Legendary:
 			item_name = "Legendary "+item_name
 	price = randi_range(price*(rarity*2+1)*.75,price*(rarity*2+1))
 

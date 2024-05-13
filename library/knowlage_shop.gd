@@ -1,6 +1,6 @@
 extends Node
 
-signal knowlage_update(val)
+signal knowledge_update(val)
 
 enum Types {
 	Elixer,
@@ -21,22 +21,22 @@ var items:Dictionary = {
 	Types.Spellbook: [],
 }
 
-var knowlage: int = 0: set=set_knowlage
+var knowledge: int = 0: set=set_knowledge
 var player_stats: PlayerStats
 
 var min_att_mod: float = 0.8
 var item_rand = RandomNumberGenerator.new()
 
-func set_knowlage(val):
-	knowlage = val
-	knowlage_update.emit(knowlage)
+func set_knowledge(val):
+	knowledge = val
+	knowledge_update.emit(knowledge)
 
 func _ready():
 	load_items()
 	item_rand.seed = randf()
 
-func add_knowlage(val):
-	knowlage += val
+func add_knowledge(val):
+	knowledge += val
 
 func get_item_data(type:Types,rarity:Rarities=Rarities.Common):
 	var item_data:ItemData = ElixerItemData.new()

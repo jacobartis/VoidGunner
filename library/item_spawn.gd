@@ -2,9 +2,9 @@ extends Node2D
 
 signal item_selected(item)
 
-@export var item_type: KnowlageShop.Types
+@export var item_type: KnowledgeShop.Types
 @export var override_rarity: bool = false
-@export var override_value: KnowlageShop.Rarities
+@export var override_value: KnowledgeShop.Rarities
 
 var rarity
 var item: set=set_item
@@ -19,9 +19,9 @@ func set_item(new_item):
 
 func spawn_item():
 	if override_rarity: rarity = override_value
-	else: rarity = KnowlageShop.get_rarity()
+	else: rarity = KnowledgeShop.get_rarity()
 	item = preload("res://library/item.tscn").instantiate()
-	var item_data = KnowlageShop.get_item_data(item_type,rarity)
+	var item_data = KnowledgeShop.get_item_data(item_type,rarity)
 	if override_rarity:
 		item_data.randomize_stats(override_value)
 	else:

@@ -1,7 +1,7 @@
 extends ItemData
 class_name ElixerItemData
 
-var type:KnowlageShop.Types = KnowlageShop.Types.Elixer
+var type:KnowledgeShop.Types = KnowledgeShop.Types.Elixer
 @export_category("Stat Changes")
 @export var max_health: float = 0
 @export var speed: float = 0.0
@@ -15,7 +15,7 @@ var type:KnowlageShop.Types = KnowlageShop.Types.Elixer
 @export var node_gap: float = 0
 @export var activation_delay: int = 0
 @export var trail_length: int = 0
-@export var knowlage_mult: float = 0
+@export var knowledge_mult: float = 0
 @export var gain_speed: float = 0
 
 func total_changes():
@@ -28,22 +28,22 @@ func total_changes():
 	total += 1 if node_gap else 0
 	total += 1 if activation_delay else 0
 	total += 1 if trail_length else 0
-	total += 1 if knowlage_mult else 0
+	total += 1 if knowledge_mult else 0
 	total += 1 if gain_speed else 0
 	return total
 
-func randomize_stats(rarity:KnowlageShop.Rarities):
+func randomize_stats(rarity:KnowledgeShop.Rarities):
 	match rarity:
-		KnowlageShop.Rarities.Common:
+		KnowledgeShop.Rarities.Common:
 			item_name = "Diluted "+item_name
-		KnowlageShop.Rarities.Rare:
+		KnowledgeShop.Rarities.Rare:
 			item_name = "Standard "+item_name
-		KnowlageShop.Rarities.Epic:
+		KnowledgeShop.Rarities.Epic:
 			item_name = "Pure "+item_name
-		KnowlageShop.Rarities.Legendary:
+		KnowledgeShop.Rarities.Legendary:
 			item_name = "Potent "+item_name
 	price = randi_range(price*(rarity*2+1)*.75,price*(rarity*2+1))
-	var dist = KnowlageShop.get_rarity_dist(rarity,total_changes())
+	var dist = KnowledgeShop.get_rarity_dist(rarity,total_changes())
 	#Horrid, do not look
 	var current = 0
 	if max_health:
@@ -70,8 +70,8 @@ func randomize_stats(rarity:KnowlageShop.Rarities):
 	if trail_length:
 		trail_length = clamp(trail_length*dist[current],-20,20) 
 		current += 1
-	if knowlage_mult:
-		knowlage_mult = clamp(knowlage_mult*dist[current],-2,2) 
+	if knowledge_mult:
+		knowledge_mult = clamp(knowledge_mult*dist[current],-2,2) 
 		current += 1
 	if gain_speed:
 		gain_speed = clamp(gain_speed*dist[current],-10,10) 
@@ -86,5 +86,5 @@ func apply_to(stats:PlayerStats):
 	stats.node_gap += node_gap
 	stats.activation_delay += activation_delay
 	stats.trail_length += trail_length
-	stats.knowlage_mult += knowlage_mult
+	stats.knowledge_mult += knowledge_mult
 	stats.gain_speed += gain_speed

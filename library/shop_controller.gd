@@ -3,14 +3,14 @@ extends Node2D
 var selected_item: set=set_selected_item
 
 func _ready():
-	KnowlageShop.knowlage_update.connect(update_knowlage_display)
-	update_knowlage_display(KnowlageShop.knowlage)
+	KnowledgeShop.knowledge_update.connect(update_knowledge_display)
+	update_knowledge_display(KnowledgeShop.knowledge)
 	var spawn_locals = get_tree().get_nodes_in_group("ItemSpawn")
 	for x in (randi()%(spawn_locals.size()-1))+1:
 		spawn_locals.pick_random().spawn_item()
 
-func update_knowlage_display(val):
-	%KnowlageDisplay.set_text(str("Knowlage : ",val))
+func update_knowledge_display(val):
+	%knowledgeDisplay.set_text(str("knowledge : ",val))
 
 func set_selected_item(new_item):
 	if new_item == selected_item:
@@ -21,7 +21,7 @@ func set_selected_item(new_item):
 	if selected_item:
 		%InventDisplay.hide()
 		toggle_invent_display(false)
-		%BuyButton.disabled = KnowlageShop.knowlage<selected_item.item_data.price
+		%BuyButton.disabled = KnowledgeShop.knowledge<selected_item.item_data.price
 		%BuyButton.show()
 		cam_anim.tween_property($Camera2D, "global_position",selected_item.global_position,.5)
 		cam_anim.tween_property($Camera2D, "zoom",Vector2(1.5,1.5),.5)
@@ -44,8 +44,8 @@ func on_buy_button_pressed():
 	if !selected_item:
 		push_error("Buy button pressed with no item selected")
 		return
-	KnowlageShop.knowlage -= selected_item.item_data.price
-	selected_item.item_data.apply_to(KnowlageShop.player_stats)
+	KnowledgeShop.knowledge -= selected_item.item_data.price
+	selected_item.item_data.apply_to(KnowledgeShop.player_stats)
 	selected_item.queue_free()
 	selected_item = null
 
