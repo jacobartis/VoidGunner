@@ -1,0 +1,119 @@
+[gd_scene load_steps=3 format=3 uid="uid://0esm2uqto816"]
+
+[ext_resource type="Script" path="res://menus/player_invent/player_stats.gd" id="1_mc4ql"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3nyf1"]
+font_size = 32
+outline_size = 5
+outline_color = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="PlayerStats" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mc4ql")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StatsHeader" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Stats"
+label_settings = SubResource("LabelSettings_3nyf1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MaxHealth" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Speed" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpellSlots" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurseHeader" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Stats"
+label_settings = SubResource("LabelSettings_3nyf1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VoidGap" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ActivationDelay" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VoidQuantity" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MadnessHeader" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Madness"
+label_settings = SubResource("LabelSettings_3nyf1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KnowlageMult" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GainSpeed" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DashHeader" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Stats"
+label_settings = SubResource("LabelSettings_3nyf1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DashCooldown" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DashSpeed" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DashDistance" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1

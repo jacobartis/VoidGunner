@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbuvimuvu6bei"]
+
+[ext_resource type="Script" path="res://menus/player_invent/whole_inventory.gd" id="1_e82ri"]
+[ext_resource type="PackedScene" uid="uid://0esm2uqto816" path="res://menus/player_invent/player_stats.tscn" id="2_m18oe"]
+[ext_resource type="PackedScene" uid="uid://denkhjl7uedii" path="res://menus/player_invent/weapon_stats.tscn" id="3_81csv"]
+[ext_resource type="PackedScene" uid="uid://dfgubbgcoods7" path="res://menus/player_invent/spell_stats.tscn" id="4_5way4"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e82ri")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.384314, 0.384314, 0.384314, 1)
+
+[node name="PlayerStats" parent="." instance=ExtResource("2_m18oe")]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.402
+offset_right = -0.104004
+
+[node name="WeaponStats" parent="." instance=ExtResource("3_81csv")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.643
+offset_left = 0.263977
+
+[node name="SpellStats" parent="." instance=ExtResource("4_5way4")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.402
+anchor_right = 0.643
+offset_left = -0.104004
+offset_right = 0.263977
+
+[connection signal="player_stats" from="." to="PlayerStats" method="update_stats"]
+[connection signal="player_stats" from="." to="WeaponStats" method="update_stats"]
+[connection signal="player_stats" from="." to="SpellStats" method="update_stats"]
