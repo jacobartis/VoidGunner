@@ -1,16 +1,18 @@
 extends Node2D
 
-var weapon :set=set_weapon 
+var weapon
+var weapon_item:WeaponItemData
 
-func set_weapon(packed_weap:PackedScene):
+func set_weapon(new_weapon_item:WeaponItemData):
 	if weapon:
 		weapon.queue_free()
-	weapon = packed_weap.instantiate()
+	weapon_item = new_weapon_item
+	weapon = weapon_item.weapon_scene.instantiate()
 	add_child(weapon)
 	weapon.global_position = global_position
 
 func _ready():
-	weapon = preload("res://weapons/pistol.tscn")
+	set_weapon(preload("res://library/items/pistol.tres").duplicate(true))
 
 func _process(delta):
 	if get_global_mouse_position().x<=global_position.x:

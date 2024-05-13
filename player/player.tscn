@@ -1,9 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://dhf2f1tnnssf1"]
+[gd_scene load_steps=28 format=3 uid="uid://dhf2f1tnnssf1"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_2kb2s"]
 [ext_resource type="Texture2D" uid="uid://craxj8mn506fr" path="res://icon.svg" id="2_lbx7p"]
 [ext_resource type="Script" path="res://player/hand.gd" id="3_4wxi1"]
 [ext_resource type="Script" path="res://player/spell_manager.gd" id="3_fq5d7"]
+[ext_resource type="Texture2D" uid="uid://80x7fcclcr0e" path="res://particle_sprites/flame.png" id="4_1auyk"]
+[ext_resource type="Texture2D" uid="uid://bprwndk8u3mnu" path="res://player/assets/SpellCast.png" id="4_plcmb"]
 [ext_resource type="Texture2D" uid="uid://bmvqcoftpat8k" path="res://player/assets/charge_bar_under.png" id="5_i1crp"]
 [ext_resource type="Texture2D" uid="uid://p3ukdt28d1fy" path="res://player/assets/charge_bar.png" id="5_to3hi"]
 [ext_resource type="Script" path="res://player/cooldown_display.gd" id="7_p4xj3"]
@@ -12,6 +14,142 @@
 [ext_resource type="Texture2D" uid="uid://mruhpsh0uuy0" path="res://player/assets/Madness_bar.png" id="10_m63dm"]
 [ext_resource type="Texture2D" uid="uid://chesawcx5f080" path="res://player/assets/health_bar.png" id="10_xgyja"]
 [ext_resource type="Script" path="res://player/spell_display.gd" id="13_wta5m"]
+
+[sub_resource type="Animation" id="Animation_56g04"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.25, 0.25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_hogig"]
+resource_name = "cast_spell"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.2),
+"transitions": PackedFloat32Array(1, 6, 1),
+"update": 0,
+"values": [Vector2(0.25, 0.25), Vector2(1.5, 1.5), Vector2(0.25, 0.25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fcap7"]
+_data = {
+"RESET": SubResource("Animation_56g04"),
+"cast_spell": SubResource("Animation_hogig")
+}
+
+[sub_resource type="Gradient" id="Gradient_48n0x"]
+colors = PackedColorArray(0.411765, 0, 0.768627, 1, 0.823529, 0, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_swwme"]
+gradient = SubResource("Gradient_48n0x")
+
+[sub_resource type="Curve" id="Curve_mufe6"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(0.748792, 0.989011), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ecvde"]
+curve = SubResource("Curve_mufe6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xwxm2"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 50.0
+angular_velocity_min = 40.0
+angular_velocity_max = 40.0
+orbit_velocity_max = 1.0
+radial_velocity_min = 40.0
+radial_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_ecvde")
+color_ramp = SubResource("GradientTexture1D_swwme")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o1a0m"]
 size = Vector2(72, 64)
@@ -223,6 +361,31 @@ trail_length = 1000
 dash_cooldown = 5.0
 dash_speed = 2000.0
 dash_distance = 500.0
+can_take_damage = true
+
+[node name="SpellManager" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("3_fq5d7")
+player = NodePath("..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SpellManager"]
+libraries = {
+"": SubResource("AnimationLibrary_fcap7")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="SpellManager"]
+visible = false
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_plcmb")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="SpellManager"]
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_xwxm2")
+texture = ExtResource("4_1auyk")
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+local_coords = true
 
 [node name="Body" type="Sprite2D" parent="."]
 scale = Vector2(0.65625, 0.609375)
@@ -232,10 +395,6 @@ texture = ExtResource("2_lbx7p")
 shape = SubResource("RectangleShape2D_o1a0m")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="SpellManager" type="Node2D" parent="." node_paths=PackedStringArray("player")]
-script = ExtResource("3_fq5d7")
-player = NodePath("..")
 
 [node name="HandOffset" type="Node2D" parent="."]
 
@@ -323,7 +482,4 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("13_wta5m")
 
-[connection signal="health_update" from="." to="HealthDisplay" method="health_change"]
-[connection signal="madness_update" from="." to="HealthDisplay" method="madness_change"]
-[connection signal="max_health_update" from="." to="HealthDisplay" method="max_health_change"]
 [connection signal="new_spell_selected" from="SpellManager" to="SpellDisplay" method="_on_spell_manager_new_spell_selected"]

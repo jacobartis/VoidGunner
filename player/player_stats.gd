@@ -10,8 +10,9 @@ class_name PlayerStats
 @export var node_gap: float = 100
 @export var activation_delay: int = 3
 @export var trail_length: int = 20
-@export var knowlage_mult: float = 2
+@export var knowledge_mult: float = 2
 @export var gain_speed: float = 1
+var madness: float = 0
 
 @export_category("Dash")
 @export var dashing_enabled: bool = true
@@ -24,16 +25,16 @@ class_name PlayerStats
 @export var spells: Array = []
 
 @export_category("Weapon")
-@export var weapon: PackedScene
+@export var weapon: WeaponItemData
 
 func save_stats(player):
-	can_take_damage = player.can_take_damage
+	madness = player.madness
 	max_health = player.max_health
 	speed = player.speed
 	node_gap = player.node_gap
 	activation_delay = player.activation_delay
 	trail_length = player.trail_length
-	knowlage_mult = player.knowlage_mult
+	knowledge_mult = player.knowledge_mult
 	gain_speed = player.gain_speed
 	dashing_enabled = player.dashing_enabled
 	dash_cooldown = player.dash_cooldown
@@ -41,17 +42,16 @@ func save_stats(player):
 	dash_distance = player.dash_distance
 	spell_slots = player.get_spell_manager().spell_slots
 	spells = player.get_spell_manager().spells
-	weapon = PackedScene.new()
-	weapon.pack(player.get_hand().weapon)
+	weapon = player.get_hand().weapon_item
 
 func load_stats(player):
-	player.can_take_damage = can_take_damage
+	player.madness = madness
 	player.max_health = max_health
 	player.speed = speed
 	player.node_gap = node_gap
 	player.activation_delay = activation_delay
 	player.trail_length = trail_length
-	player.knowlage_mult = knowlage_mult
+	player.knowledge_mult = knowledge_mult
 	player.gain_speed = gain_speed
 	player.dashing_enabled = dashing_enabled
 	player.dash_cooldown = dash_cooldown
