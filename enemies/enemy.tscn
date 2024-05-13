@@ -1,38 +1,42 @@
-[gd_scene load_steps=11 format=3 uid="uid://d2oqy10nn17id"]
+[gd_scene load_steps=15 format=3 uid="uid://d2oqy10nn17id"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_t7qcu"]
-[ext_resource type="Texture2D" uid="uid://craxj8mn506fr" path="res://icon.svg" id="2_pvrxf"]
 [ext_resource type="PackedScene" uid="uid://bsis8o24qjpgk" path="res://projectiles/melee.tscn" id="2_y7rl5"]
+[ext_resource type="Texture2D" uid="uid://dqvcqfx1g3xah" path="res://enemies/assets/basic asset pack/Basic Demon Sprites/Basic Demons 4x.png" id="3_f0fjs"]
 [ext_resource type="Script" path="res://enemies/player_detector.gd" id="3_hudq3"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_fuhjg"]
+atlas = ExtResource("3_f0fjs")
+region = Rect2(72, 0, 56, 72)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pgo6r"]
-size = Vector2(58, 56)
+size = Vector2(70, 115)
 
 [sub_resource type="Animation" id="Animation_ogld1"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/path = NodePath("Sprite2D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0.5, 0.5)]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/path = NodePath("Sprite2D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(1.5, 1.5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -68,26 +72,26 @@ resource_name = "death"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/path = NodePath("Sprite2D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(3, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0.5, 0.5), Vector2(0.5, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.164706)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/path = NodePath("Sprite2D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"transitions": PackedFloat32Array(10, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.164706)]
+"values": [Vector2(1.5, 1.5), Vector2(0.5, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -110,7 +114,69 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f1dpq"]
-radius = 73.0616
+radius = 100.005
+
+[sub_resource type="Animation" id="Animation_i354l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xplmi"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.135614, 0.0, 0.136136, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-10, -3), Vector2(0, 0), Vector2(10, -3), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ft8vl"]
+_data = {
+"RESET": SubResource("Animation_i354l"),
+"walk": SubResource("Animation_xplmi")
+}
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 collision_mask = 0
@@ -120,10 +186,11 @@ shot_speed = 5.0
 health = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_pvrxf")
+scale = Vector2(1.5, 1.5)
+texture = SubResource("AtlasTexture_fuhjg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_pgo6r")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -134,7 +201,7 @@ libraries = {
 [node name="ProjOffset" type="Node2D" parent="."]
 
 [node name="ProjSpawn" type="Node2D" parent="ProjOffset"]
-position = Vector2(50, 0)
+position = Vector2(20, 0)
 
 [node name="PlayerArea2D" type="Area2D" parent="."]
 collision_layer = 2
@@ -143,6 +210,12 @@ script = ExtResource("3_hudq3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea2D"]
 shape = SubResource("CircleShape2D_f1dpq")
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ft8vl")
+}
+autoplay = "walk"
 
 [connection signal="body_entered" from="PlayerArea2D" to="PlayerArea2D" method="_on_body_entered"]
 [connection signal="player_found" from="PlayerArea2D" to="." method="shoot"]

@@ -41,6 +41,7 @@ func hit(damage):
 		killed.emit(point_value)
 		$AnimationPlayer.play("death")
 		await $AnimationPlayer.animation_finished
+		drop_item(preload("res://pickups/scenes/knowldedge_pickup.tscn"))
 		queue_free()
 		return
 	global_position -= velocity.normalized()*(10+damage)
@@ -59,7 +60,7 @@ func shoot():
 	shot.global_position = $ProjOffset/ProjSpawn.global_position
 	remaining_cooldown = 1.0/attacks_per_second
 
-func drop_item(item):
-	item.global_position = global_position
-	get_tree().get_first_node_in_group("world").call_deferred("add_child",item)
-	
+func drop_item(item:PackedScene):
+	var inst = item.instantiate()
+	inst.global_position = global_position
+	get_tree().get_first_node_in_group("world").call_deferred("add_child",inst)
