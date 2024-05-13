@@ -22,6 +22,7 @@ ToDo:
 -Sprites
 -Enemis
 -Random environemnts (environmental hazzards)
+-Weapons
 
 Madness:
 - Causes knowlage gain increase
@@ -45,11 +46,17 @@ Shop:
 - Passive stats, random elixers avalible
 - Weapons, random selection, stats known
 - Spells, buy books to get random quality spells
-- 4 qualities of items, common, rare, epic, legendary
-- Books labeled as layman, astute, expert, unfathomable
-- Elixers labeled as diluted, standard, pure, potent
+- 4 qualities of items, common, rare, epic, legendary ✔
+- Books labeled as layman, astute, expert, unfathomable ✔
+- Elixers labeled as diluted, standard, pure, potent ✔
 - 3 tier display, flat counter with elixers, slanted coutner with weapons, front with book shelf
 - Button to show player invent & stats
 - Hovering an item shows short desc and simple stat comparison
 - Clicking zooms into item and displays invent component giving better comparion
 - Zoom menu includes purchace button
+
+Player anims:
+- Walk
+- Die
+- Dash
+- Spell cast
