@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ElixerItemData" load_steps=3 format=3 uid="uid://c5pq4o1mxw8dl"]
+
+[ext_resource type="Texture2D" uid="uid://bbrbulsnk012g" path="res://library/assets/Potions Demo/2.png" id="1_g7f8f"]
+[ext_resource type="Script" path="res://library/elixer_data.gd" id="1_y7xmv"]
+
+[resource]
+script = ExtResource("1_y7xmv")
+max_health = 0.0
+speed = 0.0
+dash_cooldown = -0.25
+dash_speed = 0.0
+dash_distance = 0.0
+node_gap = 0.0
+activation_delay = 0
+trail_length = 0
+knowlage_mult = 0.0
+gain_speed = 0.0
+item_name = "Elixer of Recovery"
+item_texture = ExtResource("1_g7f8f")
+price = 100
+min_rarity = 0

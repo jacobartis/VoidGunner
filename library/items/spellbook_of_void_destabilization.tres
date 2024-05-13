@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="SpellbookItemData" load_steps=5 format=3 uid="uid://ydhfyexwdefo"]
+
+[ext_resource type="Texture2D" uid="uid://cmiq5266g2b37" path="res://library/assets/spellbook.png" id="1_unwk7"]
+[ext_resource type="Script" path="res://library/spellbook_data.gd" id="2_snssh"]
+[ext_resource type="Script" path="res://spells/explode_void_spell.gd" id="3_a5n6j"]
+
+[sub_resource type="Resource" id="Resource_7aycq"]
+script = ExtResource("3_a5n6j")
+damage = 10.0
+name = "Destable Void"
+cost = 30.0
+cooldown = 45.0
+
+[resource]
+script = ExtResource("2_snssh")
+spell = SubResource("Resource_7aycq")
+item_name = "Spellbook of Healing"
+item_texture = ExtResource("1_unwk7")
+price = 500
+min_rarity = 2

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ElixerItemData" load_steps=3 format=3 uid="uid://bfisj3tqhsplb"]
+
+[ext_resource type="Script" path="res://library/elixer_data.gd" id="1_0y2e3"]
+[ext_resource type="Texture2D" uid="uid://cq5376kqmrilp" path="res://library/assets/Potions Demo/3.png" id="1_agbjg"]
+
+[resource]
+script = ExtResource("1_0y2e3")
+max_health = 0.0
+speed = 0.0
+dash_cooldown = 0.0
+dash_speed = 0.0
+dash_distance = 0.0
+node_gap = 50.0
+activation_delay = 3
+trail_length = -10
+knowlage_mult = 0.0
+gain_speed = 0.0
+item_name = "Elixer of Reprieve"
+item_texture = ExtResource("1_agbjg")
+price = 100
+min_rarity = 0

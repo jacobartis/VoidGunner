@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="SpellbookItemData" load_steps=5 format=3 uid="uid://bgvirqfd2m1yh"]
+
+[ext_resource type="Texture2D" uid="uid://cmiq5266g2b37" path="res://library/assets/spellbook.png" id="1_whun7"]
+[ext_resource type="Script" path="res://library/spellbook_data.gd" id="1_wyn8h"]
+[ext_resource type="Script" path="res://spells/heal_spell.gd" id="3_emjnq"]
+
+[sub_resource type="Resource" id="Resource_ld4pq"]
+script = ExtResource("3_emjnq")
+heal_percent = 10.0
+name = "Heal"
+cost = 20.0
+cooldown = 15.0
+
+[resource]
+script = ExtResource("1_wyn8h")
+spell = SubResource("Resource_ld4pq")
+item_name = "Spellbook of Healing"
+item_texture = ExtResource("1_whun7")
+price = 500
+min_rarity = 0

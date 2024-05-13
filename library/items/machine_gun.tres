@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WeaponItemData" load_steps=4 format=3 uid="uid://gbadpokbbhry"]
+
+[ext_resource type="Texture2D" uid="uid://cfmaknm8k73m2" path="res://weapons/assets/sprites/pistol.png" id="1_hm5uk"]
+[ext_resource type="Script" path="res://library/weapon_data.gd" id="2_fc4xt"]
+[ext_resource type="PackedScene" uid="uid://c3svvjsehkt4h" path="res://weapons/weapon_scenes/machine_gun.tscn" id="3_vbnap"]
+
+[resource]
+script = ExtResource("2_fc4xt")
+weapon_scene = ExtResource("3_vbnap")
+item_name = "Machine Gun"
+item_texture = ExtResource("1_hm5uk")
+price = 500
+min_rarity = 2

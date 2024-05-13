@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ElixerItemData" load_steps=3 format=3 uid="uid://cee3rr4lkrd1p"]
+
+[ext_resource type="Script" path="res://library/elixer_data.gd" id="1_0cvym"]
+[ext_resource type="Texture2D" uid="uid://bkskc8ob1nmfs" path="res://library/assets/Potions Demo/1.png" id="1_83wgq"]
+
+[resource]
+script = ExtResource("1_0cvym")
+max_health = 0.0
+speed = 100.0
+dash_cooldown = 0.0
+dash_speed = 0.0
+dash_distance = 0.0
+node_gap = 0.0
+activation_delay = 0
+trail_length = 0
+knowlage_mult = 0.0
+gain_speed = 0.0
+item_name = "Elixer of Haste"
+item_texture = ExtResource("1_83wgq")
+price = 100
+min_rarity = 0

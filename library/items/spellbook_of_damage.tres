@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="SpellbookItemData" load_steps=5 format=3 uid="uid://de6jl3p3bccmy"]
+
+[ext_resource type="Texture2D" uid="uid://cmiq5266g2b37" path="res://library/assets/spellbook.png" id="1_iv2e6"]
+[ext_resource type="Script" path="res://library/spellbook_data.gd" id="2_x2t7h"]
+[ext_resource type="Script" path="res://spells/screen_damage_spell.gd" id="3_sg2ql"]
+
+[sub_resource type="Resource" id="Resource_s5wqk"]
+script = ExtResource("3_sg2ql")
+damage = 5.0
+name = "Screen Damage"
+cost = 30.0
+cooldown = 30.0
+
+[resource]
+script = ExtResource("2_x2t7h")
+spell = SubResource("Resource_s5wqk")
+item_name = "Spellbook of ScreenDamage"
+item_texture = ExtResource("1_iv2e6")
+price = 500
+min_rarity = 1
