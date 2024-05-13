@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://pickups/pickup.gd" id="1_8g8ds"]
 [ext_resource type="Texture2D" uid="uid://craxj8mn506fr" path="res://icon.svg" id="2_wcsh2"]
-[ext_resource type="Script" path="res://pickups/actions/knowlage_pickup.gd" id="3_rierb"]
+[ext_resource type="Script" path="res://pickups/actions/knowledge_pickup.gd" id="3_rierb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1dd5d"]
 radius = 87.2812
