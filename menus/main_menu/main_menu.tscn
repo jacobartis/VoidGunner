@@ -1,0 +1,208 @@
+[gd_scene load_steps=13 format=3 uid="uid://b8752hbjbbbqe"]
+
+[ext_resource type="Theme" uid="uid://7x0wfx7saf0p" path="res://theme.tres" id="1_2jrpt"]
+[ext_resource type="Script" path="res://menus/main_menu/main_menu.gd" id="1_p72d8"]
+[ext_resource type="Shader" path="res://menus/main_menu/bg_warp.gdshader" id="2_grcmy"]
+[ext_resource type="Texture2D" uid="uid://b3tpgtnico0ms" path="res://menus/main_menu/background.png" id="3_j8djt"]
+[ext_resource type="Texture2D" uid="uid://cvl8yjlt81r4u" path="res://menus/main_menu/tutorial_images/VoidWells.png" id="5_pl5in"]
+[ext_resource type="Texture2D" uid="uid://bs7ladg6ee80l" path="res://menus/main_menu/tutorial_images/Healthbar.png" id="6_16ac7"]
+[ext_resource type="Texture2D" uid="uid://c7ilid1wqyf6r" path="res://menus/main_menu/tutorial_images/MadnessMult.png" id="7_latdq"]
+[ext_resource type="Texture2D" uid="uid://ckp5rp8xwvr4s" path="res://menus/main_menu/tutorial_images/Shop.JPG" id="8_j0kdq"]
+[ext_resource type="Texture2D" uid="uid://bk4cbiskpheoj" path="res://menus/main_menu/tutorial_images/Spell.png" id="10_u14lc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ayx4e"]
+shader = ExtResource("2_grcmy")
+shader_parameter/amplitutde = Vector2(1, 0.5)
+shader_parameter/speed = Vector2(1, 0.1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_knowg"]
+font_size = 96
+font_color = Color(0.666667, 0.0235294, 0.741176, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_p44ru"]
+font_size = 64
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2jrpt")
+script = ExtResource("1_p72d8")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_ayx4e")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_j8djt")
+stretch_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+self_modulate = Color(0.843137, 0.643137, 0.94902, 1)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 141.0
+offset_top = 40.0
+offset_right = -141.0
+offset_bottom = 462.0
+grow_horizontal = 2
+bbcode_enabled = true
+text = "[font=res://PermanentMarker-Regular.ttf] [center][font_size=256][wave amp=10.0 freq=5 ][tornado radius=10.0 freq=2.0 ] VoidGunner"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 700.0
+offset_top = 481.0
+offset_right = -700.0
+offset_bottom = -223.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+metadata/_edit_group_ = true
+
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Play"
+
+[node name="TutorialButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Tutorial"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Quit"
+
+[node name="Tutorial" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -730.0
+offset_top = -382.0
+offset_right = 730.0
+offset_bottom = 382.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tutorial"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Tutorial/VBoxContainer"]
+layout_mode = 2
+text = "Tutorial"
+label_settings = SubResource("LabelSettings_knowg")
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Tutorial/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tutorial/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="VoidWells" type="HBoxContainer" parent="Tutorial/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Tutorial/VBoxContainer/ScrollContainer/VBoxContainer/VoidWells"]
+layout_mode = 2
+texture = ExtResource("5_pl5in")
+
+[node name="Label" type="Label" parent="Tutorial/VBoxContainer/ScrollContainer/VBoxContainer/VoidWells"]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Moving spawns void wells which activate after a delay."
+label_settings = SubResource("LabelSettings_p44ru")
+autowrap_mode = 2
+
+[node name="Healthbar" type="VBoxContainer" parent="Tutorial/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Tutorial/VBoxContainer/ScrollContainer/VBoxContainer/Healthbar"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+texture = ExtResource("6_16ac7")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Tutorial/VBoxContainer/ScrollContainer/VBoxContainer/Healthbar"]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Standing on an activated well causes you to gain madness. Madness reduces max health, but is used to cast spells."
+label_settings = SubResource("LabelSettings_p44ru")
+autowrap_mode = 2
+
+[node name="Mult" type="VBoxContainer" parent="Tutorial/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Tutorial/VBoxContainer/ScrollContainer/VBoxContainer/Mult"]
+layout_mode = 2
+texture = ExtResource("7_latdq")
+
+[node name="Label" type="Label" parent="Tutorial/VBoxContainer/ScrollContainer/VBoxContainer/Mult"]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Madness also give a multiplier to both damage, and knowledge gain."
+label_settings = SubResource("LabelSettings_p44ru")
+autowrap_mode = 2
+
+[node name="Knowledge" type="HBoxContainer" parent="Tutorial/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Tutorial/VBoxContainer/ScrollContainer/VBoxContainer/Knowledge"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+texture = ExtResource("8_j0kdq")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="Tutorial/VBoxContainer/ScrollContainer/VBoxContainer/Knowledge"]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Every couple rounds will take you to a shop where you can spend knowledge for upgrades and spells."
+label_settings = SubResource("LabelSettings_p44ru")
+autowrap_mode = 2
+
+[node name="Spells" type="VBoxContainer" parent="Tutorial/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Tutorial/VBoxContainer/ScrollContainer/VBoxContainer/Spells"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+texture = ExtResource("10_u14lc")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="Tutorial/VBoxContainer/ScrollContainer/VBoxContainer/Spells"]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Spells consume madness to cast their have powerful effects. Spells have cooldown shown by the fill of the text. Spells can be swapped using the scroll wheel."
+label_settings = SubResource("LabelSettings_p44ru")
+autowrap_mode = 2
+
+[node name="CloseTutorialButton" type="Button" parent="Tutorial/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "       Close       "
+
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Tutorial/VBoxContainer/CloseTutorialButton" to="." method="_on_close_tutorial_button_pressed"]

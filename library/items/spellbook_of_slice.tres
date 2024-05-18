@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="SpellbookItemData" load_steps=6 format=3 uid="uid://bpbel38asv4k"]
+
+[ext_resource type="Texture2D" uid="uid://cmiq5266g2b37" path="res://library/assets/spellbook.png" id="1_f1kkg"]
+[ext_resource type="Script" path="res://library/spellbook_data.gd" id="2_rc4xe"]
+[ext_resource type="Script" path="res://spells/shoot_spell.gd" id="3_lqf3g"]
+[ext_resource type="PackedScene" uid="uid://bsis8o24qjpgk" path="res://projectiles/melee.tscn" id="4_ly2hk"]
+
+[sub_resource type="Resource" id="Resource_ila24"]
+script = ExtResource("3_lqf3g")
+quantity = 5
+max_angle = 10.0
+delay_between = 0.25
+shot_packed = ExtResource("4_ly2hk")
+shot_speed = 300.0
+shot_damage = 20
+name = "Slice"
+cost = 30.0
+cooldown = 20.0
+
+[resource]
+script = ExtResource("2_rc4xe")
+spell = SubResource("Resource_ila24")
+item_name = "Spellbook of Slice"
+item_texture = ExtResource("1_f1kkg")
+price = 500
+min_rarity = 1

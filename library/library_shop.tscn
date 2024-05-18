@@ -1,9 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://80cqroifpud1"]
+[gd_scene load_steps=22 format=3 uid="uid://80cqroifpud1"]
 
 [ext_resource type="Script" path="res://library/shop_controller.gd" id="1_6ur0b"]
 [ext_resource type="Texture2D" uid="uid://td2qsqwgw86x" path="res://library/assets/Table.png" id="2_npnin"]
 [ext_resource type="Script" path="res://library/item_spawn.gd" id="2_ro08d"]
+[ext_resource type="PackedScene" uid="uid://denkhjl7uedii" path="res://menus/player_invent/weapon_stats.tscn" id="3_8fpn5"]
+[ext_resource type="Texture2D" uid="uid://doybvvdhbpvpb" path="res://library/assets/stall_backdrop.jpg" id="3_jihvk"]
+[ext_resource type="Script" path="res://library/item_display.gd" id="3_t44nf"]
+[ext_resource type="PackedScene" uid="uid://dfgubbgcoods7" path="res://menus/player_invent/spell_stats.tscn" id="4_5rojm"]
 [ext_resource type="PackedScene" uid="uid://cbuvimuvu6bei" path="res://menus/player_invent/whole_inventory.tscn" id="4_y2ffk"]
+[ext_resource type="PackedScene" uid="uid://0esm2uqto816" path="res://menus/player_invent/player_stats.tscn" id="5_ksyr0"]
+[ext_resource type="Theme" uid="uid://7x0wfx7saf0p" path="res://theme.tres" id="5_uu57f"]
+[ext_resource type="Texture2D" uid="uid://bhi5vsf03e2o1" path="res://library/assets/background.jpg" id="9_fvkwe"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_txc57"]
 font_size = 64
@@ -16,8 +23,129 @@ shadow_offset = Vector2(-5, 5)
 [sub_resource type="LabelSettings" id="LabelSettings_2xoc8"]
 font_size = 32
 
+[sub_resource type="Shader" id="Shader_48ytv"]
+code = "shader_type canvas_item;
+
+uniform float alpha = 1.0;
+uniform float inner_radius = 0.0;
+uniform float outer_radius = 1.0;
+
+void fragment() {
+	float x = abs(UV.r-.5)*2.0;
+	float y = abs(UV.g-.5)*2.0;
+	float q = 1.0-(1.0-sqrt(x*x+y*y)/outer_radius)/(1.0-inner_radius);
+	COLOR = vec4(0, 0, 0, q*alpha);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6qx3u"]
+shader = SubResource("Shader_48ytv")
+shader_parameter/alpha = 1.0
+shader_parameter/inner_radius = 0.0
+shader_parameter/outer_radius = 1.0
+
+[sub_resource type="Animation" id="Animation_ia2ny"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/outer_radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_i4bsg"]
+resource_name = "exit"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/outer_radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.9, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [10.0, 1.0, 1.0, 2.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_6ioa7"]
+resource_name = "intro"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/outer_radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 5.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_di0sv"]
+_data = {
+"RESET": SubResource("Animation_ia2ny"),
+"exit": SubResource("Animation_i4bsg"),
+"intro": SubResource("Animation_6ioa7")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dqhr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8pg18"]
+
 [node name="LibraryShop" type="Node2D"]
 script = ExtResource("1_6ur0b")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1535.0
+offset_top = -610.0
+offset_right = 1535.0
+offset_bottom = 746.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_fvkwe")
+stretch_mode = 1
+
+[node name="StallBackdrop" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -539.0
+offset_top = -760.0
+offset_right = 539.0
+offset_bottom = 505.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_jihvk")
+stretch_mode = 1
+
+[node name="StallBackdrop2" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -600.0
+offset_top = -383.0
+offset_right = 600.0
+offset_bottom = 672.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_npnin")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -31,7 +159,8 @@ offset_left = -375.0
 offset_right = 375.0
 offset_bottom = 88.0
 grow_horizontal = 2
-text = "Library (Knowlage Shop)"
+theme = ExtResource("5_uu57f")
+text = "Library (Knowledge Shop)"
 label_settings = SubResource("LabelSettings_txc57")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -50,9 +179,27 @@ offset_right = 0.0959473
 offset_bottom = -0.304016
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("5_uu57f")
 text = "Buy"
 
-[node name="KnowlageDisplay" type="Label" parent="CanvasLayer"]
+[node name="QuitButton" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.452
+anchor_top = 0.892
+anchor_right = 0.548
+anchor_bottom = 0.933
+offset_left = 0.159973
+offset_top = -0.360046
+offset_right = -0.160034
+offset_bottom = 0.359985
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("5_uu57f")
+text = "Leave
+"
+
+[node name="KnowledgeDisplay" type="Label" parent="CanvasLayer"]
 unique_name_in_owner = true
 anchors_preset = -1
 anchor_left = 0.472
@@ -64,6 +211,7 @@ offset_top = -0.160004
 offset_right = 0.244019
 offset_bottom = 0.127991
 grow_horizontal = 2
+theme = ExtResource("5_uu57f")
 label_settings = SubResource("LabelSettings_2xoc8")
 
 [node name="InventDisplay" type="VBoxContainer" parent="CanvasLayer"]
@@ -72,10 +220,11 @@ anchors_preset = -1
 anchor_top = 0.951
 anchor_right = 1.0
 anchor_bottom = 1.823
-offset_top = -0.248047
-offset_bottom = -0.304077
+offset_top = 1.92004
+offset_bottom = 1.86401
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("5_uu57f")
 metadata/_edit_group_ = true
 
 [node name="ToggleInvent" type="Button" parent="CanvasLayer/InventDisplay"]
@@ -89,75 +238,202 @@ text = "Toggle Inventory"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Table" type="Sprite2D" parent="."]
-position = Vector2(0, 72)
-scale = Vector2(7.76563, 3.82813)
-texture = ExtResource("2_npnin")
-metadata/_edit_lock_ = true
-
-[node name="ItemSpawns" type="Node2D" parent="."]
-metadata/_edit_lock_ = true
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+z_as_relative = false
+material = SubResource("ShaderMaterial_6qx3u")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("5_uu57f")
 metadata/_edit_group_ = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ColorRect"]
+unique_name_in_owner = true
+root_node = NodePath("../../..")
+libraries = {
+"": SubResource("AnimationLibrary_di0sv")
+}
+autoplay = "intro"
+
+[node name="ItemDisplay" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchor_top = 0.114
+anchor_right = 0.326
+anchor_bottom = 0.886
+offset_left = -653.0
+offset_top = -0.12001
+offset_right = -652.92
+offset_bottom = 0.119934
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_uu57f")
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ItemDisplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.231373, 0.227451, 0.184314, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/ItemDisplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 28.0
+offset_right = -35.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7dqhr")
+script = ExtResource("3_t44nf")
+
+[node name="StatsDisplay" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchor_left = 0.653
+anchor_top = 0.114
+anchor_right = 0.997
+anchor_bottom = 0.886
+offset_left = 695.24
+offset_top = -0.12001
+offset_right = 694.76
+offset_bottom = 0.119934
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_uu57f")
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/StatsDisplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.231373, 0.227451, 0.184314, 1)
+
+[node name="Container" type="PanelContainer" parent="CanvasLayer/StatsDisplay"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.037
+anchor_top = 0.026
+anchor_right = 0.963
+anchor_bottom = 0.974
+offset_left = -0.147999
+offset_top = -0.0880013
+offset_right = 0.147949
+offset_bottom = 0.0879517
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8pg18")
+
+[node name="WeaponStats" parent="CanvasLayer/StatsDisplay/Container" instance=ExtResource("3_8fpn5")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 5
+mouse_filter = 2
+
+[node name="SpellStats" parent="CanvasLayer/StatsDisplay/Container" instance=ExtResource("4_5rojm")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 5
+mouse_filter = 2
+
+[node name="PlayerStats" parent="CanvasLayer/StatsDisplay/Container" instance=ExtResource("5_ksyr0")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 5
+mouse_filter = 2
+
+[node name="ItemSpawns" type="Node2D" parent="."]
+position = Vector2(0, 213)
+
 [node name="ElixerItemSpawn" type="Node2D" parent="ItemSpawns" groups=["ItemSpawn"]]
-position = Vector2(-432, 39)
+position = Vector2(-479, 35)
 script = ExtResource("2_ro08d")
 
 [node name="ElixerItemSpawn2" type="Node2D" parent="ItemSpawns" groups=["ItemSpawn"]]
-position = Vector2(-339, 30)
+position = Vector2(-324, 25)
 script = ExtResource("2_ro08d")
 
 [node name="ElixerItemSpawn3" type="Node2D" parent="ItemSpawns" groups=["ItemSpawn"]]
-position = Vector2(434, 40)
+position = Vector2(494, 43)
 script = ExtResource("2_ro08d")
 
 [node name="ElixerItemSpawn4" type="Node2D" parent="ItemSpawns" groups=["ItemSpawn"]]
-position = Vector2(340, 25)
+position = Vector2(372, 43)
 script = ExtResource("2_ro08d")
 
 [node name="SpellbookItemSpawn" type="Node2D" parent="ItemSpawns" groups=["ItemSpawn"]]
-position = Vector2(-427, 137)
+position = Vector2(-424, 117)
 script = ExtResource("2_ro08d")
 item_type = 1
 
 [node name="SpellbookItemSpawn2" type="Node2D" parent="ItemSpawns" groups=["ItemSpawn"]]
-position = Vector2(-304, 123)
+position = Vector2(-271, 117)
 script = ExtResource("2_ro08d")
 item_type = 1
 
 [node name="SpellbookItemSpawn3" type="Node2D" parent="ItemSpawns" groups=["ItemSpawn"]]
-position = Vector2(446, 150)
+position = Vector2(453, 134)
 script = ExtResource("2_ro08d")
 item_type = 1
 
 [node name="SpellbookItemSpawn4" type="Node2D" parent="ItemSpawns" groups=["ItemSpawn"]]
-position = Vector2(317, 153)
+position = Vector2(300, 122)
 script = ExtResource("2_ro08d")
 item_type = 1
 
 [node name="SpellbookItemSpawn5" type="Node2D" parent="ItemSpawns" groups=["ItemSpawn"]]
-position = Vector2(217, 113)
+position = Vector2(201, 82)
 script = ExtResource("2_ro08d")
 item_type = 1
 
 [node name="WeaponItemSpawn" type="Node2D" parent="ItemSpawns" groups=["ItemSpawn"]]
-position = Vector2(-155, 123)
+position = Vector2(-117, 97)
 script = ExtResource("2_ro08d")
 item_type = 2
 override_value = 1
 
 [node name="WeaponItemSpawn2" type="Node2D" parent="ItemSpawns" groups=["ItemSpawn"]]
-position = Vector2(-23, 73)
+position = Vector2(-1, 39)
 script = ExtResource("2_ro08d")
 item_type = 2
 override_value = 1
 
 [node name="WeaponItemSpawn3" type="Node2D" parent="ItemSpawns" groups=["ItemSpawn"]]
-position = Vector2(74, 134)
+position = Vector2(82, 124)
 script = ExtResource("2_ro08d")
 item_type = 2
 override_rarity = true
 override_value = 1
 
+[connection signal="item_selected" from="." to="CanvasLayer/ItemDisplay/PanelContainer" method="update_stats"]
 [connection signal="pressed" from="CanvasLayer/BuyButton" to="." method="on_buy_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/QuitButton" to="." method="on_quit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/InventDisplay/ToggleInvent" to="CanvasLayer/InventDisplay/Inventory" method="update_stats"]
 [connection signal="toggled" from="CanvasLayer/InventDisplay/ToggleInvent" to="." method="toggle_invent_display"]
+[connection signal="player_stats" from="CanvasLayer/InventDisplay/Inventory" to="CanvasLayer/StatsDisplay/Container/WeaponStats" method="update_stats"]
+[connection signal="player_stats" from="CanvasLayer/InventDisplay/Inventory" to="CanvasLayer/StatsDisplay/Container/SpellStats" method="update_stats"]
+[connection signal="player_stats" from="CanvasLayer/InventDisplay/Inventory" to="CanvasLayer/StatsDisplay/Container/PlayerStats" method="update_stats"]
+[connection signal="item_selected" from="ItemSpawns/ElixerItemSpawn" to="." method="on_item_selected"]
+[connection signal="item_selected" from="ItemSpawns/ElixerItemSpawn2" to="." method="on_item_selected"]
+[connection signal="item_selected" from="ItemSpawns/ElixerItemSpawn3" to="." method="on_item_selected"]
+[connection signal="item_selected" from="ItemSpawns/ElixerItemSpawn4" to="." method="on_item_selected"]
+[connection signal="item_selected" from="ItemSpawns/SpellbookItemSpawn" to="." method="on_item_selected"]
+[connection signal="item_selected" from="ItemSpawns/SpellbookItemSpawn2" to="." method="on_item_selected"]
+[connection signal="item_selected" from="ItemSpawns/SpellbookItemSpawn3" to="." method="on_item_selected"]
+[connection signal="item_selected" from="ItemSpawns/SpellbookItemSpawn4" to="." method="on_item_selected"]
+[connection signal="item_selected" from="ItemSpawns/SpellbookItemSpawn5" to="." method="on_item_selected"]
+[connection signal="item_selected" from="ItemSpawns/WeaponItemSpawn" to="." method="on_item_selected"]
+[connection signal="item_selected" from="ItemSpawns/WeaponItemSpawn2" to="." method="on_item_selected"]
+[connection signal="item_selected" from="ItemSpawns/WeaponItemSpawn3" to="." method="on_item_selected"]

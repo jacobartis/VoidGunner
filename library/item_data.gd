@@ -7,6 +7,10 @@ class_name ItemData
 @export var price: int = 100
 @export var min_rarity: KnowledgeShop.Rarities
 
+func get_printable_stats():
+	return [str(item_name),
+	str("Price: ",price)]
+
 func randomize_stats(quality:KnowledgeShop.Rarities):
 	pass
 

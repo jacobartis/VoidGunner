@@ -3,5 +3,7 @@ extends Control
 signal player_stats(val)
 
 func _ready():
-	player_stats.emit(KnowledgeShop.player_stats)
+	update_stats()
 
+func update_stats():
+	player_stats.emit(GameManager.player_stats)

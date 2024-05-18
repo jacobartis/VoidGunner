@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ElixerItemData" load_steps=3 format=3 uid="uid://drdt2c0vgoihy"]
+
+[ext_resource type="Texture2D" uid="uid://c3ne87hpd3q4p" path="res://library/assets/Potions Demo/4.png" id="1_88ntt"]
+[ext_resource type="Script" path="res://library/elixer_data.gd" id="2_nwgf8"]
+
+[resource]
+script = ExtResource("2_nwgf8")
+max_health = 10.0
+speed = 0.0
+dash_cooldown = 0.0
+dash_speed = 0.0
+dash_distance = 0.0
+node_gap = 0.0
+activation_delay = 0
+trail_length = 0
+knowledge_mult = 0.0
+gain_speed = 0.0
+item_name = "Health Elixer"
+item_texture = ExtResource("1_88ntt")
+price = 100
+min_rarity = 0

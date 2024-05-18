@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=3 uid="uid://c2wu17h056b6e"]
+
+[ext_resource type="Script" path="res://projectiles/projectile.gd" id="1_nqw5h"]
+[ext_resource type="Texture2D" uid="uid://80x7fcclcr0e" path="res://particle_sprites/flame.png" id="2_kkua5"]
+
+[sub_resource type="Curve" id="Curve_lhv24"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.337278, 0.758242), -1.92857, -1.92857, 0, 0, Vector2(0.473373, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hxvtg"]
+curve = SubResource("Curve_lhv24")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jpwpp"]
+radius = 14.1421
+
+[sub_resource type="Gradient" id="Gradient_wtpds"]
+offsets = PackedFloat32Array(0, 0.154472, 0.523035, 0.875339)
+colors = PackedColorArray(1, 1, 1, 1, 0.109804, 1, 0, 1, 0.513726, 0.756863, 0, 1, 0.396078, 0.396078, 0.396078, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8f66t"]
+gradient = SubResource("Gradient_wtpds")
+
+[sub_resource type="Curve" id="Curve_57twi"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.277372, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0659339), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_u1e0h"]
+curve = SubResource("Curve_57twi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_srk2n"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 20.0
+gravity = Vector3(0, -90, 0)
+tangential_accel_min = 30.0
+tangential_accel_max = 30.0
+scale_min = 1.5
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_u1e0h")
+color_ramp = SubResource("GradientTexture1D_8f66t")
+
+[node name="GreenFire" type="Node2D"]
+script = ExtResource("1_nqw5h")
+life_time = 3.0
+speed_variation = SubResource("CurveTexture_hxvtg")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_jpwpp")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_srk2n")
+texture = ExtResource("2_kkua5")
+local_coords = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

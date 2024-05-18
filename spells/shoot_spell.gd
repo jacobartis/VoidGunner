@@ -11,6 +11,18 @@ class_name ShootSpell
 @export var shot_speed = 400.0
 @export var shot_damage = 1
 
+func get_printable_stats():
+	var arr = super()
+	arr.append_array([str("Shots: ",snapped(quantity,0.1)),
+	str("Spread: ",snapped(max_angle,0.1),"deg"),
+	str("Fire Rate: ",snapped(1.0/delay_between,0.1)),
+	str("Damage: ",snapped(shot_damage,0.1)),
+	str("Shot Speed: ",snapped(shot_speed,0.1))])
+	return arr
+
+func update_power(mult):
+	shot_damage = shot_damage*sqrt(mult)
+
 func cast(body):
 	for x in quantity:
 		var shot = shot_packed.instantiate()

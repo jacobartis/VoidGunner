@@ -6,14 +6,14 @@
 [resource]
 script = ExtResource("1_0cvym")
 max_health = 0.0
-speed = 100.0
+speed = 50.0
 dash_cooldown = 0.0
-dash_speed = 0.0
+dash_speed = 20.0
 dash_distance = 0.0
 node_gap = 0.0
 activation_delay = 0
 trail_length = 0
-knowlage_mult = 0.0
+knowledge_mult = 0.0
 gain_speed = 0.0
 item_name = "Elixer of Haste"
 item_texture = ExtResource("1_83wgq")

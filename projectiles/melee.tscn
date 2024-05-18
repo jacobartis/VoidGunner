@@ -1,9 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsis8o24qjpgk"]
+[gd_scene load_steps=4 format=3 uid="uid://bsis8o24qjpgk"]
 
 [ext_resource type="Script" path="res://projectiles/projectile.gd" id="1_o6tbx"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kbsaq"]
-size = Vector2(62, 132)
 
 [sub_resource type="Curve" id="Curve_u3qrs"]
 min_value = 0.5
@@ -12,121 +9,25 @@ point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_irk7d"]
 interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.0491803, 1)
+offsets = PackedFloat32Array(0, 0.501786, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0.0767028)
-
-[sub_resource type="Animation" id="Animation_drxlm"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Line2D:gradient:offsets")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [PackedFloat32Array(0, 0.0491803, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Line2D:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Area2D:monitoring")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_af6it"]
-resource_name = "attack"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Line2D:gradient:offsets")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(0.5, 1, 1, 1),
-"update": 0,
-"values": [PackedFloat32Array(0, 0.2, 0.6), PackedFloat32Array(0.2, 0.4, 0.8), PackedFloat32Array(0.5, 0.8, 1), PackedFloat32Array(0.9, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Line2D:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Area2D:monitoring")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
-[sub_resource type="Animation" id="Animation_x4qq3"]
-resource_name = "despawn"
-length = 0.5
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_l4l0d"]
-_data = {
-"RESET": SubResource("Animation_drxlm"),
-"attack": SubResource("Animation_af6it"),
-"despawn": SubResource("Animation_x4qq3")
-}
 
 [node name="Melee" type="Node2D"]
 script = ExtResource("1_o6tbx")
-animated = true
 life_time = 0.5
 look_towards = true
 
 [node name="Area2D" type="Area2D" parent="."]
-monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_kbsaq")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(2.74322, 0)
+scale = Vector2(1.06516, 1)
+polygon = PackedVector2Array(-22, -57, 8, -34, 19, -2, 9, 32, -28, 61)
 
 [node name="Line2D" type="Line2D" parent="."]
-visible = false
 points = PackedVector2Array(-28, -64, 10, -36, 24, 0, 10, 36, -28, 64)
 width_curve = SubResource("Curve_u3qrs")
 gradient = SubResource("Gradient_irk7d")
 joint_mode = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_l4l0d")
-}
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

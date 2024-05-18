@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="SpellbookItemData" load_steps=6 format=3 uid="uid://ikin51cq64wk"]
+
+[ext_resource type="Texture2D" uid="uid://cmiq5266g2b37" path="res://library/assets/spellbook.png" id="1_wdjfi"]
+[ext_resource type="Script" path="res://library/spellbook_data.gd" id="2_lrlrn"]
+[ext_resource type="Script" path="res://spells/shoot_spell.gd" id="3_lfqwc"]
+[ext_resource type="PackedScene" uid="uid://bpmmid6ojjj2l" path="res://projectiles/shot.tscn" id="4_2fgp6"]
+
+[sub_resource type="Resource" id="Resource_42det"]
+script = ExtResource("3_lfqwc")
+quantity = 20
+max_angle = 45.0
+delay_between = 0.0
+shot_packed = ExtResource("4_2fgp6")
+shot_speed = 700.0
+shot_damage = 5
+name = "Shotgun"
+cost = 15.0
+cooldown = 10.0
+
+[resource]
+script = ExtResource("2_lrlrn")
+spell = SubResource("Resource_42det")
+item_name = "Chanel Shotgun"
+item_texture = ExtResource("1_wdjfi")
+price = 250
+min_rarity = 1

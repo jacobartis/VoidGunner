@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ElixerItemData" load_steps=3 format=3 uid="uid://biss1om4pn255"]
+
+[ext_resource type="Texture2D" uid="uid://xf7duhlup3g5" path="res://library/assets/Potions Demo/5.png" id="1_ujtg8"]
+[ext_resource type="Script" path="res://library/elixer_data.gd" id="2_ecgaf"]
+
+[resource]
+script = ExtResource("2_ecgaf")
+max_health = 0.0
+speed = 0.0
+dash_cooldown = 0.0
+dash_speed = 0.0
+dash_distance = 0.0
+node_gap = 0.0
+activation_delay = -1
+trail_length = 5
+knowledge_mult = 2.0
+gain_speed = 5.0
+item_name = "Cursed Potion"
+item_texture = ExtResource("1_ujtg8")
+price = 200
+min_rarity = 2

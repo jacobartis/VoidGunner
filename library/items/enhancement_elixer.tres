@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ElixerItemData" load_steps=3 format=3 uid="uid://dod20c4wuiio"]
+
+[ext_resource type="Texture2D" uid="uid://bbrbulsnk012g" path="res://library/assets/Potions Demo/2.png" id="1_qudeu"]
+[ext_resource type="Script" path="res://library/elixer_data.gd" id="2_v61wk"]
+
+[resource]
+script = ExtResource("2_v61wk")
+max_health = 5.0
+speed = 10.0
+dash_cooldown = -0.1
+dash_speed = 20.0
+dash_distance = 50.0
+node_gap = 0.0
+activation_delay = 0
+trail_length = 0
+knowledge_mult = 0.0
+gain_speed = 0.0
+item_name = "Enhancement Elixer"
+item_texture = ExtResource("1_qudeu")
+price = 150
+min_rarity = 1

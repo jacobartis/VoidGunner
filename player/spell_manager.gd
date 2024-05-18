@@ -15,9 +15,7 @@ func add_spell(spell):
 	if spells.size()>=spell_slots:
 		spells.pop_front()
 	spells.append(spell)
-
-func _ready():
-	add_spell(ExplodeVoidSpell.new())
+	new_spell_selected.emit(spells[current_spell])
 
 func _process(delta):
 	for spell in spells:

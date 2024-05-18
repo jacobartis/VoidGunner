@@ -1,11 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://0esm2uqto816"]
 
 [ext_resource type="Script" path="res://menus/player_invent/player_stats.gd" id="1_mc4ql"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_3nyf1"]
-font_size = 32
-outline_size = 5
-outline_color = Color(0.129412, 0.129412, 0.129412, 1)
+[ext_resource type="LabelSettings" uid="uid://bf01dcwt4mj4a" path="res://menus/player_invent/header_label.tres" id="2_b7ows"]
 
 [node name="PlayerStats" type="Control"]
 layout_mode = 3
@@ -27,7 +23,7 @@ grow_vertical = 2
 [node name="StatsHeader" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Stats"
-label_settings = SubResource("LabelSettings_3nyf1")
+label_settings = ExtResource("2_b7ows")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -52,7 +48,7 @@ vertical_alignment = 1
 [node name="CurseHeader" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Stats"
-label_settings = SubResource("LabelSettings_3nyf1")
+label_settings = ExtResource("2_b7ows")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -77,11 +73,11 @@ vertical_alignment = 1
 [node name="MadnessHeader" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Madness"
-label_settings = SubResource("LabelSettings_3nyf1")
+label_settings = ExtResource("2_b7ows")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="KnowlageMult" type="Label" parent="VBoxContainer"]
+[node name="KnowledgeMult" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 horizontal_alignment = 1
@@ -96,7 +92,7 @@ vertical_alignment = 1
 [node name="DashHeader" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Stats"
-label_settings = SubResource("LabelSettings_3nyf1")
+label_settings = ExtResource("2_b7ows")
 horizontal_alignment = 1
 vertical_alignment = 1
 

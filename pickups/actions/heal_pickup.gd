@@ -1,6 +1,6 @@
 extends PickupAction
 
-@export var heal: float = 10
+@export var heal_percent: float = 5
 
 func on_pickup(body):
-	body.health += heal
+	body.health += (heal_percent*(1+GameManager.wave/20))*body.max_health/100

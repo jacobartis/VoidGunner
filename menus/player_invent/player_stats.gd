@@ -10,7 +10,7 @@ func update_stats(stats:PlayerStats):
 	%ActivationDelay.set_text(str("Void Activation Delay: ",stats.activation_delay))
 	%VoidQuantity.set_text(str("Total Void Portals: ",stats.trail_length))
 	
-	%knowledgeMult.set_text(str("Max knowledge Mult: ",stats.knowledge_mult))
+	%KnowledgeMult.set_text(str("Max knowledge Mult: ",stats.knowledge_mult))
 	%GainSpeed.set_text(str("Madness Gain Speed: ",stats.gain_speed))
 	
 	%DashCooldown.set_text(str("Dash Cooldown: ",stats.dash_cooldown))

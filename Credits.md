@@ -4,3 +4,4 @@ https://godotshaders.com/shader/aberration-phasmophobia-effect/
 pixel-poem Dungeon tileset 2 https://pixel-poem.itch.io/dungeon-assetpuck
 https://nebula-nexus.itch.io/35-potions-asset-pixelart-sprites-for-tilsetsobjetcs
 https://deepdivegamestudio.itch.io/demon-sprite-pack
+https://deepdivegamestudio.itch.io/humanoid-asset-pack

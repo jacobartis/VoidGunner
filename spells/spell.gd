@@ -8,6 +8,11 @@ class_name Spell
 
 var remaining: float = 0
 
+func get_printable_stats():
+	return [str("Name: ",name),
+	str("Cost: ",snapped(cost,0.1)),
+	str("Cooldown: ",snapped(cooldown,0.1))]
+
 func randomize_stats(rarity:KnowledgeShop.Rarities):
 	var dist = KnowledgeShop.get_rarity_dist(rarity,3)
 	match rarity:
@@ -18,8 +23,8 @@ func randomize_stats(rarity:KnowledgeShop.Rarities):
 		KnowledgeShop.Rarities.Legendary:
 			name = "Supreme "+name
 	update_power(dist[0])
-	cost = clamp(cost/dist[1],0,95)
-	cooldown = clamp(cooldown/dist[2],2.5,120)
+	cost = clamp(cost/sqrt(dist[1]),0,95)
+	cooldown = clamp(cooldown/sqrt(dist[2]),2.5,120)
 
 func update_power(mult):
 	pass

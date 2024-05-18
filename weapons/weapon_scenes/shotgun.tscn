@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://bgo0te0o8psrg"]
+[gd_scene load_steps=14 format=3 uid="uid://bgo0te0o8psrg"]
 
 [ext_resource type="Script" path="res://weapons/weapon.gd" id="1_p870r"]
 [ext_resource type="Texture2D" uid="uid://comojqge77jn4" path="res://weapons/assets/sprites/muzzle_flash.png" id="2_3hieo"]
-[ext_resource type="Texture2D" uid="uid://cfmaknm8k73m2" path="res://weapons/assets/sprites/pistol.png" id="3_k5sjv"]
-[ext_resource type="AudioStream" uid="uid://dlfkeo1d5lpis" path="res://weapons/assets/audio/pistol_reload.mp3" id="4_k8b3d"]
-[ext_resource type="AudioStream" uid="uid://brslya6870nmw" path="res://weapons/assets/audio/pistol_reload_end.mp3" id="5_27kn4"]
-[ext_resource type="AudioStream" uid="uid://d525q4ujkq24" path="res://weapons/assets/audio/pistol_shoot.mp3" id="6_q51e0"]
+[ext_resource type="Shader" path="res://weapons/shimer.gdshader" id="3_521ry"]
+[ext_resource type="AudioStream" uid="uid://d2ed56n2m8i63" path="res://weapons/assets/audio/shotgun_reload.mp3" id="4_hq6gf"]
+[ext_resource type="Texture2D" uid="uid://dpesgd0m8kfmb" path="res://weapons/assets/sprites/Shotgun.png" id="4_stkwy"]
+[ext_resource type="AudioStream" uid="uid://crlh5vy2toxly" path="res://weapons/assets/audio/shogun_end.mp3" id="5_1de3e"]
+[ext_resource type="AudioStream" uid="uid://ntqlvqkyen3e" path="res://weapons/assets/audio/shotgun-firing-3-14483.mp3" id="6_etvj2"]
 
 [sub_resource type="Animation" id="Animation_wjcju"]
 length = 0.001
@@ -164,13 +165,28 @@ _data = {
 "shoot": SubResource("Animation_pwcfp")
 }
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7toji"]
+frequency = 0.0173
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dhuhc"]
+seamless = true
+noise = SubResource("FastNoiseLite_7toji")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_51jes"]
+shader = ExtResource("3_521ry")
+shader_parameter/intencity = 0.0
+shader_parameter/shine_color = Color(0.862745, 0.34902, 0.839216, 0.776471)
+shader_parameter/line_width = 0.5
+shader_parameter/angle = 0.785398
+shader_parameter/speed = 0.5
+shader_parameter/wait_cycles = 1.0
+shader_parameter/noise = SubResource("NoiseTexture2D_dhuhc")
+
 [node name="Shotgun" type="Node2D"]
 script = ExtResource("1_p870r")
 shots_per_attack = 5
 max_angle = 30.0
 cartrage = false
-max_ammo = 4
-reload_time = 5.0
 damage = 2.0
 speed = 1200.0
 speed_variance = 200.0
@@ -189,20 +205,21 @@ position = Vector2(29, -2)
 texture = ExtResource("2_3hieo")
 
 [node name="Weapon" type="Sprite2D" parent="Sprites"]
-texture = ExtResource("3_k5sjv")
+material = SubResource("ShaderMaterial_51jes")
+texture = ExtResource("4_stkwy")
 
 [node name="ProjSpawn" type="Node2D" parent="."]
-position = Vector2(9, -1)
+position = Vector2(27, -4)
 
 [node name="Reload" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_k8b3d")
+stream = ExtResource("4_hq6gf")
 pitch_scale = 1.5
 
 [node name="ReloadEnd" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_27kn4")
+stream = ExtResource("5_1de3e")
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_q51e0")
+stream = ExtResource("6_etvj2")
 volume_db = -20.0
 pitch_scale = 2.0
 

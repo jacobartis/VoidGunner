@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponItemData" load_steps=4 format=3 uid="uid://cfhckv4akg8vp"]
 
-[ext_resource type="Texture2D" uid="uid://cfmaknm8k73m2" path="res://weapons/assets/sprites/pistol.png" id="1_c0g4x"]
+[ext_resource type="Texture2D" uid="uid://drnojoerecyvf" path="res://weapons/assets/sprites/flamethrower.png" id="1_2khun"]
 [ext_resource type="Script" path="res://library/weapon_data.gd" id="2_o32h0"]
 [ext_resource type="PackedScene" uid="uid://cgf30mlopngcq" path="res://weapons/weapon_scenes/flamethrower.tscn" id="3_lebh0"]
 
@@ -8,6 +8,6 @@
 script = ExtResource("2_o32h0")
 weapon_scene = ExtResource("3_lebh0")
 item_name = "Flamethrower"
-item_texture = ExtResource("1_c0g4x")
+item_texture = ExtResource("1_2khun")
 price = 600
-min_rarity = 0
+min_rarity = 2

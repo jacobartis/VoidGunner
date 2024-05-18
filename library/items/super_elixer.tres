@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ElixerItemData" load_steps=3 format=3 uid="uid://bphm620ux5v4m"]
+
+[ext_resource type="Texture2D" uid="uid://bbrbulsnk012g" path="res://library/assets/Potions Demo/2.png" id="1_1dylh"]
+[ext_resource type="Script" path="res://library/elixer_data.gd" id="2_hn01f"]
+
+[resource]
+script = ExtResource("2_hn01f")
+max_health = 20.0
+speed = 100.0
+spell_slots = 1
+dash_cooldown = -1.0
+dash_speed = 100.0
+dash_distance = 200.0
+node_gap = 50.0
+activation_delay = 3
+trail_length = -15
+knowledge_mult = 10.0
+gain_speed = 100.0
+item_name = "\"Super Elixer\""
+item_texture = ExtResource("1_1dylh")
+price = 300
+min_rarity = 3

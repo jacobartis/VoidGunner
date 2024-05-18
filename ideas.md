@@ -16,18 +16,15 @@ Simple gameplay
 Knowlage used to buy upgrades
 
 ToDo:
--Wave system with difficulty points
 -UI
--Shop
--Sprites
--Enemis
 -Random environemnts (environmental hazzards)
--Weapons
+-Enemy Health bar
 
 Madness:
-- Causes knowlage gain increase
+- Causes knowlage gain increase ✔
 - Reduces max health ✔
-- Increases damage 
+- Increases damage ✔
+- Causes purple shimmer when powered up
 - Used as mana system ✔
 
 Spells:
@@ -35,7 +32,7 @@ Spells:
 - Shoot powerful burst ✔
 - Damage all enemies ✔
 - Heal ✔
-- Explode all void wells
+- Explode all void wells ✔
 
 Sprites:
 - Simple dungeon enemies
@@ -43,20 +40,20 @@ Sprites:
 
 Shop:
 - 3 main sections
-- Passive stats, random elixers avalible
-- Weapons, random selection, stats known
-- Spells, buy books to get random quality spells
+- Passive stats, random elixers avalible ✔
+- Weapons, random selection, stats known ✔
+- Spells, buy books to get random quality spells ✔
 - 4 qualities of items, common, rare, epic, legendary ✔
 - Books labeled as layman, astute, expert, unfathomable ✔
 - Elixers labeled as diluted, standard, pure, potent ✔
-- 3 tier display, flat counter with elixers, slanted coutner with weapons, front with book shelf
-- Button to show player invent & stats
+- 3 tier display, flat counter with elixers, slanted coutner with weapons, front with book shelf ✔
+- Button to show player invent & stats ✔
 - Hovering an item shows short desc and simple stat comparison
-- Clicking zooms into item and displays invent component giving better comparion
-- Zoom menu includes purchace button
+- Clicking zooms into item and displays invent component giving better comparion ✔
+- Zoom menu includes purchace button ✔
+- Change item quality to a "level" system ✔
 
 Player anims:
 - Walk
-- Die
 - Dash
 - Spell cast

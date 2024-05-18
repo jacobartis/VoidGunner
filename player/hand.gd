@@ -20,6 +20,9 @@ func _process(delta):
 	else:
 		weapon.is_left.emit(false)
 
+func madness_modifier(val):
+	weapon.madness_mult = snapped(1+GameManager.player_stats.knowledge_mult*val/100,.5)
+
 func shoot():
 	if !weapon:return
 	weapon.shoot()

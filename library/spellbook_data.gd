@@ -5,6 +5,11 @@ var type:KnowledgeShop.Types = KnowledgeShop.Types.Spellbook
 @export_category("Spellbook Info")
 @export var spell: Spell
 
+func get_printable_stats():
+	var arr = super()
+	arr.append_array(spell.get_printable_stats())
+	return arr
+
 func randomize_stats(rarity:KnowledgeShop.Rarities):
 	match rarity:
 		KnowledgeShop.Rarities.Common:

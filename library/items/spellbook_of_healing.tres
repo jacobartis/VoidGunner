@@ -16,5 +16,5 @@ script = ExtResource("1_wyn8h")
 spell = SubResource("Resource_ld4pq")
 item_name = "Spellbook of Healing"
 item_texture = ExtResource("1_whun7")
-price = 500
+price = 250
 min_rarity = 0

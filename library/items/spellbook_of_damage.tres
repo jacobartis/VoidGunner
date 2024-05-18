@@ -16,5 +16,5 @@ script = ExtResource("2_x2t7h")
 spell = SubResource("Resource_s5wqk")
 item_name = "Spellbook of ScreenDamage"
 item_texture = ExtResource("1_iv2e6")
-price = 500
+price = 1000
 min_rarity = 1

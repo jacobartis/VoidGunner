@@ -14,7 +14,7 @@ cooldown = 45.0
 [resource]
 script = ExtResource("2_snssh")
 spell = SubResource("Resource_7aycq")
-item_name = "Spellbook of Healing"
+item_name = "Spellbook of Void Destabilization"
 item_texture = ExtResource("1_unwk7")
-price = 500
+price = 1250
 min_rarity = 2

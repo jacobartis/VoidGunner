@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WeaponItemData" load_steps=4 format=3 uid="uid://kbnix4obvc74"]
+
+[ext_resource type="Texture2D" uid="uid://dpesgd0m8kfmb" path="res://weapons/assets/sprites/Shotgun.png" id="1_drxkc"]
+[ext_resource type="Script" path="res://library/weapon_data.gd" id="2_tbrgt"]
+[ext_resource type="PackedScene" uid="uid://bgo0te0o8psrg" path="res://weapons/weapon_scenes/shotgun.tscn" id="3_g4vbd"]
+
+[resource]
+script = ExtResource("2_tbrgt")
+weapon_scene = ExtResource("3_g4vbd")
+item_name = "Shotgun"
+item_texture = ExtResource("1_drxkc")
+price = 200
+min_rarity = 0

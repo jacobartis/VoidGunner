@@ -1,0 +1,245 @@
+[gd_scene load_steps=21 format=3 uid="uid://cbu6328unaloq"]
+
+[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_7aqrn"]
+[ext_resource type="Texture2D" uid="uid://dqvcqfx1g3xah" path="res://enemies/assets/basic asset pack/Basic Demon Sprites/Basic Demons 4x.png" id="2_uc7nb"]
+[ext_resource type="Script" path="res://enemies/enemy_attacks/projectile_attack.gd" id="3_xj0oa"]
+[ext_resource type="PackedScene" uid="uid://c2wu17h056b6e" path="res://projectiles/green_fire.tscn" id="4_1gbp8"]
+[ext_resource type="Script" path="res://enemies/player_detector.gd" id="6_bp5ja"]
+[ext_resource type="Texture2D" uid="uid://bg8601dplushu" path="res://enemies/assets/health_bar_under.png" id="6_go80k"]
+[ext_resource type="Texture2D" uid="uid://chesawcx5f080" path="res://enemies/assets/health_bar.png" id="7_gnpq0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fuhjg"]
+atlas = ExtResource("2_uc7nb")
+region = Rect2(216, 0, 56, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pgo6r"]
+size = Vector2(70, 115)
+
+[sub_resource type="Animation" id="Animation_ogld1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.5, 1.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:collision_layer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_6d1bv"]
+resource_name = "damage"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4timm"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.164706)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(10, 1),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(0.5, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:collision_layer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2rhfo"]
+_data = {
+"RESET": SubResource("Animation_ogld1"),
+"damage": SubResource("Animation_6d1bv"),
+"death": SubResource("Animation_4timm")
+}
+
+[sub_resource type="Curve" id="Curve_wtjds"]
+_data = [Vector2(0.0536131, 1), 0.0, 0.0, 0, 0, Vector2(0.102564, 0.105031), 0.0, 0.0, 0, 0, Vector2(0.296037, 0.110768), 0.0, 0.0, 0, 0, Vector2(0.421911, 0.563989), 0.0, 0.0, 0, 0, Vector2(0.606061, 1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_xhout"]
+curve = SubResource("Curve_wtjds")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_toreg"]
+radius = 450.0
+
+[sub_resource type="Animation" id="Animation_i354l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xplmi"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, 0), Vector2(0, 10), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ft8vl"]
+_data = {
+"RESET": SubResource("Animation_i354l"),
+"walk": SubResource("Animation_xplmi")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fimcm"]
+size = Vector2(70, 98)
+
+[node name="Eye" type="CharacterBody2D" groups=["enemy"]]
+collision_mask = 0
+script = ExtResource("1_7aqrn")
+price = 5
+min_wave = 8
+damage = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = SubResource("AtlasTexture_fuhjg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_pgo6r")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2rhfo")
+}
+
+[node name="ProjectileAttack" type="Node2D" parent="."]
+script = ExtResource("3_xj0oa")
+shot_scene = ExtResource("4_1gbp8")
+fire_rate = 0.25
+shots_per_attack = 5
+speed = 900.0
+speed_variance = 200.0
+max_angle = 45.0
+lifetime_override = 3.0
+speed_variation_override = SubResource("CurveTexture_xhout")
+
+[node name="ProjOffset" type="Node2D" parent="."]
+
+[node name="PlayerArea2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("6_bp5ja")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea2D"]
+shape = SubResource("CircleShape2D_toreg")
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ft8vl")
+}
+autoplay = "walk"
+
+[node name="ContactDamage" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContactDamage"]
+shape = SubResource("RectangleShape2D_fimcm")
+
+[node name="EnemyHealthBar" type="TextureProgressBar" parent="."]
+modulate = Color(1, 1, 1, 0.611765)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -80.0
+offset_right = 48.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+step = 0.1
+texture_under = ExtResource("6_go80k")
+texture_progress = ExtResource("7_gnpq0")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="attack" from="." to="ProjectileAttack" method="attack"]
+[connection signal="health_update" from="." to="EnemyHealthBar" method="set_value"]
+[connection signal="max_health_update" from="." to="EnemyHealthBar" method="set_max"]
+[connection signal="attacking" from="ProjectileAttack" to="AudioStreamPlayer2D" method="play"]
+[connection signal="player_found" from="PlayerArea2D" to="." method="shoot"]

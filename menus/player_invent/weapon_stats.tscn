@@ -1,11 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://denkhjl7uedii"]
+[gd_scene load_steps=2 format=3 uid="uid://denkhjl7uedii"]
 
 [ext_resource type="Script" path="res://menus/player_invent/weapon_stats.gd" id="1_wsh20"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_3nyf1"]
-font_size = 32
-outline_size = 5
-outline_color = Color(0.129412, 0.129412, 0.129412, 1)
 
 [node name="WeaponStats" type="Control"]
 layout_mode = 3
@@ -28,58 +23,3 @@ grow_vertical = 2
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 3
-
-[node name="WeaponStats" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "Stats"
-label_settings = SubResource("LabelSettings_3nyf1")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Damage" type="Label" parent="VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="FireRate" type="Label" parent="VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Ammo" type="Label" parent="VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ReloadTime" type="Label" parent="VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SpreadAngle" type="Label" parent="VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ShotsPerAttack" type="Label" parent="VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ShotSpeed" type="Label" parent="VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Pierce" type="Label" parent="VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-horizontal_alignment = 1
-vertical_alignment = 1

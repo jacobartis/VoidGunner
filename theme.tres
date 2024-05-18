@@ -1,0 +1,67 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://7x0wfx7saf0p"]
+
+[ext_resource type="FontFile" uid="uid://df5w0sfltp5y3" path="res://PermanentMarker-Regular.ttf" id="1_sewpc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4j2qk"]
+bg_color = Color(0.32549, 0.152941, 0.356863, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.584314, 0.584314, 0.584314, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 5
+shadow_offset = Vector2(-5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d1bxd"]
+bg_color = Color(0.427451, 0.211765, 0.466667, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.835294, 0.835294, 0.835294, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 5
+shadow_offset = Vector2(-5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_caaq5"]
+bg_color = Color(0.32549, 0.152941, 0.356863, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.25098, 0.25098, 0.25098, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ljyi"]
+bg_color = Color(0.768627, 0.447059, 0.913725, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0.392157, 0.188235, 0.427451, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[resource]
+default_font = ExtResource("1_sewpc")
+Button/styles/hover = SubResource("StyleBoxFlat_4j2qk")
+Button/styles/normal = SubResource("StyleBoxFlat_d1bxd")
+Button/styles/pressed = SubResource("StyleBoxFlat_caaq5")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_2ljyi")

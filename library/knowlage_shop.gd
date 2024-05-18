@@ -1,7 +1,5 @@
 extends Node
 
-signal knowledge_update(val)
-
 enum Types {
 	Elixer,
 	Spellbook,
@@ -21,22 +19,14 @@ var items:Dictionary = {
 	Types.Spellbook: [],
 }
 
-var knowledge: int = 0: set=set_knowledge
-var player_stats: PlayerStats
-
 var min_att_mod: float = 0.8
 var item_rand = RandomNumberGenerator.new()
 
-func set_knowledge(val):
-	knowledge = val
-	knowledge_update.emit(knowledge)
+var luck: float = 0
 
 func _ready():
 	load_items()
 	item_rand.seed = randf()
-
-func add_knowledge(val):
-	knowledge += val
 
 func get_item_data(type:Types,rarity:Rarities=Rarities.Common):
 	var item_data:ItemData = ElixerItemData.new()
@@ -47,7 +37,10 @@ func get_item_data(type:Types,rarity:Rarities=Rarities.Common):
 	return item_data.duplicate(true)
 
 func get_rarity():
-	return item_rand.randi()%4
+	if item_rand.randi()%1000<=5+5*GameManager.wave/10:return Rarities.Legendary
+	elif item_rand.randi()%1000<=50+50*GameManager.wave/10:return Rarities.Epic
+	elif item_rand.randi()%1000<=300+100*GameManager.wave/5:return Rarities.Rare
+	else:return Rarities.Common
 
 func get_rarity_dist(rarity:Rarities,quant:int=1):
 	var stat_total = min_att_mod*(quant)+(rarity*5+1)
