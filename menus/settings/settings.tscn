@@ -1,0 +1,362 @@
+[gd_scene load_steps=9 format=3 uid="uid://bifjfnrjd3em8"]
+
+[ext_resource type="Theme" uid="uid://7x0wfx7saf0p" path="res://theme.tres" id="1_kw5i6"]
+[ext_resource type="Script" path="res://menus/settings/settings.gd" id="2_2eqfw"]
+[ext_resource type="Script" path="res://menus/settings/input_mapper.gd" id="3_e1ica"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mxlek"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_4ymyg"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_wn3wm"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_gqcne"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_j8ls7"]
+font_size = 64
+
+[node name="Settings" type="CanvasLayer"]
+process_mode = 3
+layer = 2
+visible = false
+script = ExtResource("2_2eqfw")
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.352
+anchor_top = 0.228
+anchor_right = 0.648
+anchor_bottom = 0.772
+offset_left = 0.159973
+offset_top = -0.240021
+offset_right = -0.160034
+offset_bottom = 0.23999
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_kw5i6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_mxlek")
+horizontal_alignment = 1
+
+[node name="Music" type="VBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Music"]
+layout_mode = 2
+text = "Music"
+horizontal_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="Panel/VBoxContainer/Music"]
+layout_mode = 2
+
+[node name="Sound" type="VBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Sound"]
+layout_mode = 2
+text = "Sound"
+horizontal_alignment = 1
+
+[node name="SoundSlider" type="HSlider" parent="Panel/VBoxContainer/Sound"]
+layout_mode = 2
+
+[node name="OpenControls" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "    Controls    "
+
+[node name="MenuButton" type="Button" parent="Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "    Menu    "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 25
+
+[node name="Quit" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "    Quit    "
+
+[node name="Close" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "    Close    "
+
+[node name="Controls" type="PanelContainer" parent="."]
+visible = false
+anchors_preset = -1
+anchor_left = 0.328
+anchor_top = 0.181
+anchor_right = 0.672
+anchor_bottom = 0.819
+offset_left = -0.76001
+offset_top = -0.480011
+offset_right = 0.759888
+offset_bottom = 0.479919
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_kw5i6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="Controls/VBoxContainer"]
+layout_mode = 2
+text = "Controls"
+label_settings = SubResource("LabelSettings_4ymyg")
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Controls/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PlayerUp" type="HBoxContainer" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer" groups=["input"]]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 100
+script = ExtResource("3_e1ica")
+control_name = &"player_up"
+
+[node name="Label" type="Label" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerUp"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Up"
+label_settings = SubResource("LabelSettings_wn3wm")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerUp"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Test"
+flat = true
+
+[node name="PlayerLeft" type="HBoxContainer" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer" groups=["input"]]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 100
+script = ExtResource("3_e1ica")
+control_name = &"player_left"
+
+[node name="Label" type="Label" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerLeft"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Up"
+label_settings = SubResource("LabelSettings_wn3wm")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerLeft"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Test"
+flat = true
+
+[node name="PlayerRight" type="HBoxContainer" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer" groups=["input"]]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 100
+script = ExtResource("3_e1ica")
+control_name = &"player_right"
+
+[node name="Label" type="Label" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerRight"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Up"
+label_settings = SubResource("LabelSettings_wn3wm")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerRight"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Test"
+flat = true
+
+[node name="PlayerDown" type="HBoxContainer" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer" groups=["input"]]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 100
+script = ExtResource("3_e1ica")
+control_name = &"player_down"
+
+[node name="Label" type="Label" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerDown"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Up"
+label_settings = SubResource("LabelSettings_wn3wm")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerDown"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Test"
+flat = true
+
+[node name="PlayerDash" type="HBoxContainer" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer" groups=["input"]]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 100
+script = ExtResource("3_e1ica")
+control_name = &"player_dash"
+
+[node name="Label" type="Label" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerDash"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Up"
+label_settings = SubResource("LabelSettings_wn3wm")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerDash"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Test"
+flat = true
+
+[node name="PlayerCast" type="HBoxContainer" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer" groups=["input"]]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 100
+script = ExtResource("3_e1ica")
+control_name = &"player_cast"
+
+[node name="Label" type="Label" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerCast"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Up"
+label_settings = SubResource("LabelSettings_wn3wm")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerCast"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Test"
+flat = true
+
+[node name="PlayerReload" type="HBoxContainer" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer" groups=["input"]]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 100
+script = ExtResource("3_e1ica")
+control_name = &"player_reload"
+
+[node name="Label" type="Label" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerReload"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Up"
+label_settings = SubResource("LabelSettings_wn3wm")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerReload"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Test"
+flat = true
+
+[node name="CloseControls" type="Button" parent="Controls/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "    Close    "
+
+[node name="AwaitingInput" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_kw5i6")
+
+[node name="ColorRect" type="ColorRect" parent="AwaitingInput"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.282353)
+
+[node name="Label" type="Label" parent="AwaitingInput"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.274
+anchor_top = 0.457
+anchor_right = 0.726
+anchor_bottom = 0.543
+offset_left = 0.419983
+offset_top = 0.439972
+offset_right = -0.420044
+offset_bottom = -0.440063
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press a new button to bind."
+label_settings = SubResource("LabelSettings_gqcne")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Duplicate" type="Popup" parent="."]
+size = Vector2i(959, 100)
+
+[node name="Label" type="Label" parent="Duplicate"]
+offset_right = 40.0
+offset_bottom = 24.0
+theme = ExtResource("1_kw5i6")
+text = "That key is already being used."
+label_settings = SubResource("LabelSettings_j8ls7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="value_changed" from="Panel/VBoxContainer/Music/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="Panel/VBoxContainer/Sound/SoundSlider" to="." method="_on_sound_slider_value_changed"]
+[connection signal="pressed" from="Panel/VBoxContainer/OpenControls" to="." method="_on_open_controls_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/MenuButton" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/Close" to="." method="_on_close_pressed"]
+[connection signal="awaiting_input" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerUp" to="." method="_on_input_awaiting_input"]
+[connection signal="recived_input" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerUp" to="." method="_on_input_recived_input"]
+[connection signal="pressed" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerUp/Button" to="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerUp" method="_on_button_pressed"]
+[connection signal="awaiting_input" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerLeft" to="." method="_on_input_awaiting_input"]
+[connection signal="recived_input" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerLeft" to="." method="_on_input_recived_input"]
+[connection signal="pressed" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerLeft/Button" to="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerLeft" method="_on_button_pressed"]
+[connection signal="awaiting_input" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerRight" to="." method="_on_input_awaiting_input"]
+[connection signal="recived_input" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerRight" to="." method="_on_input_recived_input"]
+[connection signal="pressed" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerRight/Button" to="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerRight" method="_on_button_pressed"]
+[connection signal="awaiting_input" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerDown" to="." method="_on_input_awaiting_input"]
+[connection signal="recived_input" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerDown" to="." method="_on_input_recived_input"]
+[connection signal="pressed" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerDown/Button" to="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerDown" method="_on_button_pressed"]
+[connection signal="awaiting_input" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerDash" to="." method="_on_input_awaiting_input"]
+[connection signal="recived_input" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerDash" to="." method="_on_input_recived_input"]
+[connection signal="pressed" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerDash/Button" to="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerDash" method="_on_button_pressed"]
+[connection signal="awaiting_input" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerCast" to="." method="_on_input_awaiting_input"]
+[connection signal="recived_input" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerCast" to="." method="_on_input_recived_input"]
+[connection signal="pressed" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerCast/Button" to="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerCast" method="_on_button_pressed"]
+[connection signal="awaiting_input" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerReload" to="." method="_on_input_awaiting_input"]
+[connection signal="recived_input" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerReload" to="." method="_on_input_recived_input"]
+[connection signal="pressed" from="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerReload/Button" to="Controls/VBoxContainer/ScrollContainer/VBoxContainer/PlayerReload" method="_on_button_pressed"]
+[connection signal="pressed" from="Controls/VBoxContainer/CloseControls" to="." method="_on_close_controls_pressed"]

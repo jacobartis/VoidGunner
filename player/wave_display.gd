@@ -13,7 +13,6 @@ func _process(delta):
 		modulate = Color.WHITE
 
 func update_text(val):
-	print(val)
 	set_text(str("Wave: ",val))
 	display = 5
 

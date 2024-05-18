@@ -27,6 +27,7 @@ func set_selected_item(new_item):
 		%InventDisplay.hide()
 		toggle_invent_display(false)
 		%BuyButton.show()
+		%Hint.show()
 		%BuyButton.disabled = GameManager.knowledge<selected_item.item_data.price
 		%QuitButton.hide()
 		
@@ -37,6 +38,7 @@ func set_selected_item(new_item):
 	else:
 		%InventDisplay.show()
 		%BuyButton.hide()
+		%Hint.hide()
 		%QuitButton.show()
 		menu_anim.tween_property($Camera2D, "global_position",global_position,.5)
 		menu_anim.tween_property($Camera2D, "zoom",Vector2(1,1),.5)
@@ -53,6 +55,8 @@ func set_selected_item(new_item):
 func _input(event):
 	if event.is_action_pressed("player_cancel") and selected_item:
 		selected_item = null
+	if event.is_action_pressed("pause"):
+		Settings.open()
 
 func on_item_selected(item):
 	selected_item = item

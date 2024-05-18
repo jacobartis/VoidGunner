@@ -33,6 +33,7 @@ var dash_dir: Vector2
 @export var speed: float = 400.0
 @onready var health: float = max_health: set=set_health
 var dead: bool = false
+var opening_shop: bool = false
 
 func set_knowledge_mult(val):
 	knowledge_mult = val
@@ -47,9 +48,16 @@ func set_max_health(val):
 	max_health_update.emit(max_health)
 
 func set_health(val):
+	if dead: return
 	health = clamp(val,0,max_health-(max_health/100.0)*madness)
 	max_health_update.emit(max_health-(max_health/100.0)*madness)
 	health_update.emit(health)
+	if health<=0:
+		dead = true
+		$AltAnimationPlayer.play("death")
+		await $AltAnimationPlayer.animation_finished
+		GameManager.end_game()
+		return
 
 func set_can_dash(val):
 	can_dash = val and dashing_enabled
@@ -75,7 +83,7 @@ func _ready():
 
 func _process(delta):
 	if dead: return
-	if overlaping_goop:
+	if overlaping_goop and !opening_shop:
 		madness+=delta*gain_speed
 		time_out_goop = 0
 	else:
@@ -119,8 +127,11 @@ func _input(event):
 		%Hand.reload()
 	if event.is_action_pressed("player_cast"):
 		$SpellManager.cast_current()
+	if event.is_action_pressed("pause"):
+		Settings.open()
 
 func shop_transition():
+	opening_shop = true
 	save_stats()
 	$CanvasLayer.hide()
 
@@ -145,12 +156,6 @@ func hit(damage):
 	if !can_take_damage: return
 	print("ow ",damage)
 	health -= damage
-	if health<=0:
-		dead = true
-		$AltAnimationPlayer.play("death")
-		await $AltAnimationPlayer.animation_finished
-		GameManager.end_game()
-		return
 	can_take_damage = false
 	$AltAnimationPlayer.play("damaged")
 	await $AltAnimationPlayer.animation_finished

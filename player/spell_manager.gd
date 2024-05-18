@@ -17,6 +17,9 @@ func add_spell(spell):
 	spells.append(spell)
 	new_spell_selected.emit(spells[current_spell])
 
+func _ready():
+	add_spell(preload("res://spells/start_spell.tres"))
+
 func _process(delta):
 	for spell in spells:
 		spell.process(delta)

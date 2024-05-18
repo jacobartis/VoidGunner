@@ -20,16 +20,17 @@ func _ready():
 	GameManager.playing_rounds = true
 	GameManager.new_wave.connect(spawn_wave)
 	GameManager.open_shop.connect(shop_transition)
+	GameManager.game_end.connect(%AnimationPlayer.stop)
 	get_tree().get_first_node_in_group("player").global_position = get_tree().get_nodes_in_group("spawn").pick_random().global_position
 
 func shop_transition():
 	%AnimationPlayer.play("shop_transition")
 	await %AnimationPlayer.animation_finished
 	GameManager.go_to_shop()
-	
+
 func spawn_wave(wave):
 	var to_spawn = max(ceil(2*wave),ceil(pow(value_per_wave,wave)))
-	print("to spawn",pow(value_per_wave,wave))
+	print("to spawn ",to_spawn)
 	while to_spawn>0:
 		var enemy = get_enemy(to_spawn)
 		to_spawn -= enemy.price

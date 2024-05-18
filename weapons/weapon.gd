@@ -28,7 +28,6 @@ var can_shoot: bool = true
 
 func set_madness_mult(val):
 	madness_mult = val
-	print(madness_mult)
 	$Sprites/Weapon.get_material().set_shader_parameter("intencity",madness_mult)
 
 func get_printable_stats():

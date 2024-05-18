@@ -18,3 +18,7 @@ func _on_close_tutorial_button_pressed():
 
 func _on_credits_pressed():
 	$Credits.show()
+
+
+func _on_settings_pressed():
+	Settings.open()

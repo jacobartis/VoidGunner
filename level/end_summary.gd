@@ -10,8 +10,7 @@ func show_stats():
 	show()
 
 func _on_play_again_pressed():
-	GameManager.reset()
-	get_tree().reload_current_scene()
+	GameManager.to_level()
 
 func _on_quit_pressed():
 	get_tree().quit()

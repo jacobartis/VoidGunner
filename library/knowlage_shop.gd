@@ -59,11 +59,21 @@ func get_rarity_dist(rarity:Rarities,quant:int=1):
 func load_items():
 	var dir = "res://library/items/"
 	var dir_access = DirAccess.open(dir)
+	print("Loading items")
 	if dir_access:
+		print("Dir open")
 		dir_access.list_dir_begin()
 		var file_name = "is overwritten"
 		while file_name != "":
+			print("file found ",file_name)
 			file_name = dir_access.get_next()
-			if !file_name.ends_with(".tres"):continue
-			var item = ResourceLoader.load(dir+file_name,"ItemData")
+			if !".tres" in file_name:
+				print(file_name," is not valid to load")
+				continue
+			if '.remap' in file_name:
+				file_name = file_name.trim_suffix('.remap')
+				print("Trimming .remap")
+			print(file_name," is valid to load, trying to load")
+			var item = ResourceLoader.load(dir+file_name,"Resource")
 			items[item.type].append(item)
+			print("Loaded and added ",item.item_name)

@@ -15,13 +15,16 @@ var wave: int = 0 :set=set_wave
 var knowledge: int = 0: set=set_knowledge
 var alive_enemies: int = 0: set=set_alive_enemies
 var wave_time: float = 0: set=set_round_timer
-var next_shop: int = 10
+var next_shop: int = 5
 var shop_interval: int = 5
 var playing_rounds: bool = false
 var active_round: bool = false
 #Stats
 var kills: int = 0
 var total_knowledge: int = 0
+
+var music_volume: float = 0
+var sound_volume:float = 0
 
 func set_wave(val):
 	wave = val
@@ -41,6 +44,7 @@ func set_round_timer(val):
 func add_knowledge(val):
 	knowledge += val
 	total_knowledge += val
+
 
 func _process(delta):
 	wave_time = clamp(wave_time-delta,0,INF)

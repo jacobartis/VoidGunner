@@ -165,6 +165,25 @@ label_settings = SubResource("LabelSettings_txc57")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Hint" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = -1
+anchor_left = 0.305
+anchor_top = 0.119
+anchor_right = 0.695
+anchor_bottom = 0.204
+offset_left = -0.600037
+offset_top = -0.520004
+offset_right = 0.599854
+offset_bottom = -0.320007
+grow_horizontal = 2
+theme = ExtResource("5_uu57f")
+text = "Right Click to deselect"
+label_settings = SubResource("LabelSettings_txc57")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="BuyButton" type="Button" parent="CanvasLayer"]
 unique_name_in_owner = true
 visible = false
@@ -239,6 +258,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 z_as_relative = false
 material = SubResource("ShaderMaterial_6qx3u")
 anchors_preset = 15
