@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b8752hbjbbbqe"]
+[gd_scene load_steps=15 format=3 uid="uid://b8752hbjbbbqe"]
 
 [ext_resource type="Theme" uid="uid://7x0wfx7saf0p" path="res://theme.tres" id="1_2jrpt"]
 [ext_resource type="Script" path="res://menus/main_menu/main_menu.gd" id="1_p72d8"]
@@ -8,12 +8,16 @@
 [ext_resource type="Texture2D" uid="uid://bs7ladg6ee80l" path="res://menus/main_menu/tutorial_images/Healthbar.png" id="6_16ac7"]
 [ext_resource type="Texture2D" uid="uid://c7ilid1wqyf6r" path="res://menus/main_menu/tutorial_images/MadnessMult.png" id="7_latdq"]
 [ext_resource type="Texture2D" uid="uid://ckp5rp8xwvr4s" path="res://menus/main_menu/tutorial_images/Shop.JPG" id="8_j0kdq"]
+[ext_resource type="Script" path="res://menus/main_menu/easter_egg.gd" id="10_eqndm"]
 [ext_resource type="Texture2D" uid="uid://bk4cbiskpheoj" path="res://menus/main_menu/tutorial_images/Spell.png" id="10_u14lc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ayx4e"]
 shader = ExtResource("2_grcmy")
 shader_parameter/amplitutde = Vector2(1, 0.5)
 shader_parameter/speed = Vector2(1, 0.1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_uum4k"]
+font_size = 96
 
 [sub_resource type="LabelSettings" id="LabelSettings_knowg"]
 font_size = 96
@@ -75,6 +79,11 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Play"
 
+[node name="Credits" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Credits"
+
 [node name="TutorialButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -85,7 +94,55 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Quit"
 
+[node name="Credits" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -395.0
+offset_top = -274.0
+offset_right = 395.0
+offset_bottom = 274.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Credits/VBoxContainer"]
+layout_mode = 2
+text = "Credits"
+label_settings = SubResource("LabelSettings_uum4k")
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Credits/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[center]
+[u]Programming[/u]
+Jacob Artis
+[b][u]Art[/u][/b]
+Jacob Artis
+pixel poem, Dungeon tileset 2
+nexus, Potion assets
+dive game studio, Demon and human sprites
+[u]Sound[/u]
+Pixabay sound effects
+
+My entry for the Godot Wild Jam #69, thank you to the GWJ team for hosing this event!
+[/center]"
+
+[node name="Button" type="Button" parent="Credits/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "     Close     "
+
 [node name="Tutorial" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -159,7 +216,7 @@ texture = ExtResource("7_latdq")
 custom_minimum_size = Vector2(900, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Madness also give a multiplier to both damage, and knowledge gain."
+text = "Madness also gives a multiplier to both damage, and knowledge gain."
 label_settings = SubResource("LabelSettings_p44ru")
 autowrap_mode = 2
 
@@ -202,7 +259,29 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "       Close       "
 
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.003
+offset_left = -6.0
+offset_top = -5.0
+offset_right = -1.76
+offset_bottom = 5.0
+script = ExtResource("10_eqndm")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Button"]
+visible = false
+layout_mode = 0
+offset_left = 12.0
+offset_right = 298.0
+offset_bottom = 92.0
+bbcode_enabled = true
+text = "[wave][rainbow][font_size=64]Hello :)"
+
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Credits/VBoxContainer/Button" to="Credits" method="hide"]
 [connection signal="pressed" from="Tutorial/VBoxContainer/CloseTutorialButton" to="." method="_on_close_tutorial_button_pressed"]
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

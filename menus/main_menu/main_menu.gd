@@ -14,3 +14,7 @@ func _on_quit_button_pressed():
 
 func _on_close_tutorial_button_pressed():
 	$Tutorial.hide()
+
+
+func _on_credits_pressed():
+	$Credits.show()
