@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bifjfnrjd3em8"]
+[gd_scene load_steps=11 format=3 uid="uid://bifjfnrjd3em8"]
 
 [ext_resource type="Theme" uid="uid://7x0wfx7saf0p" path="res://theme.tres" id="1_kw5i6"]
 [ext_resource type="Script" path="res://menus/settings/settings.gd" id="2_2eqfw"]
 [ext_resource type="Script" path="res://menus/settings/input_mapper.gd" id="3_e1ica"]
+[ext_resource type="AudioStream" uid="uid://bic424e0osltk" path="res://enemies/assets/audio/sword-sound-2-36274.mp3" id="3_u7epw"]
+[ext_resource type="Script" path="res://sound_audio.gd" id="4_smr0h"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mxlek"]
 font_size = 64
@@ -59,6 +61,9 @@ horizontal_alignment = 1
 
 [node name="MusicSlider" type="HSlider" parent="Panel/VBoxContainer/Music"]
 layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
 
 [node name="Sound" type="VBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
@@ -70,6 +75,13 @@ horizontal_alignment = 1
 
 [node name="SoundSlider" type="HSlider" parent="Panel/VBoxContainer/Sound"]
 layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SoundAudio" type="AudioStreamPlayer2D" parent="Panel/VBoxContainer/Sound"]
+stream = ExtResource("3_u7epw")
+script = ExtResource("4_smr0h")
 
 [node name="OpenControls" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
@@ -333,6 +345,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="value_changed" from="Panel/VBoxContainer/Music/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="drag_ended" from="Panel/VBoxContainer/Sound/SoundSlider" to="Panel/VBoxContainer/Sound/SoundAudio" method="play"]
 [connection signal="value_changed" from="Panel/VBoxContainer/Sound/SoundSlider" to="." method="_on_sound_slider_value_changed"]
 [connection signal="pressed" from="Panel/VBoxContainer/OpenControls" to="." method="_on_open_controls_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/MenuButton" to="." method="_on_menu_pressed"]

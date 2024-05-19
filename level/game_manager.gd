@@ -8,6 +8,8 @@ signal open_shop()
 signal round_start()
 signal round_end()
 signal game_end()
+signal sound_update(vol)
+signal music_update(vol)
 
 var player_stats: PlayerStats
 
@@ -23,8 +25,8 @@ var active_round: bool = false
 var kills: int = 0
 var total_knowledge: int = 0
 
-var music_volume: float = 0
-var sound_volume:float = 0
+var music_volume: float = 1:set=set_music_volume
+var sound_volume:float = 1:set=set_sound_volume
 
 func set_wave(val):
 	wave = val
@@ -45,6 +47,13 @@ func add_knowledge(val):
 	knowledge += val
 	total_knowledge += val
 
+func set_music_volume(val):
+	music_volume=val
+	music_update.emit(music_volume)
+
+func set_sound_volume(val):
+	sound_volume=val
+	sound_update.emit(sound_volume)
 
 func _process(delta):
 	wave_time = clamp(wave_time-delta,0,INF)

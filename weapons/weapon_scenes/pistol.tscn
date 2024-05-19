@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://1gptinr2go44"]
+[gd_scene load_steps=15 format=3 uid="uid://1gptinr2go44"]
 
 [ext_resource type="Script" path="res://weapons/weapon.gd" id="1_fful4"]
 [ext_resource type="Texture2D" uid="uid://comojqge77jn4" path="res://weapons/assets/sprites/muzzle_flash.png" id="2_hrex0"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dlfkeo1d5lpis" path="res://weapons/assets/audio/pistol_reload.mp3" id="4_ckr5i"]
 [ext_resource type="Shader" path="res://weapons/shimer.gdshader" id="4_dpg5w"]
 [ext_resource type="AudioStream" uid="uid://brslya6870nmw" path="res://weapons/assets/audio/pistol_reload_end.mp3" id="5_rduus"]
+[ext_resource type="Script" path="res://sound_audio.gd" id="6_cynw3"]
 [ext_resource type="AudioStream" uid="uid://d525q4ujkq24" path="res://weapons/assets/audio/pistol_shoot.mp3" id="6_p702n"]
 
 [sub_resource type="Animation" id="Animation_wjcju"]
@@ -209,13 +210,16 @@ position = Vector2(9, -1)
 [node name="Reload" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_ckr5i")
 pitch_scale = 1.5
+script = ExtResource("6_cynw3")
 
 [node name="ReloadEnd" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_rduus")
+script = ExtResource("6_cynw3")
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_p702n")
-volume_db = -20.0
+volume_db = -10.0
 pitch_scale = 2.0
+script = ExtResource("6_cynw3")
 
 [connection signal="is_left" from="." to="Sprites/Weapon" method="set_flip_v"]

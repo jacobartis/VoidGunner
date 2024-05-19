@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bi1tkwbdupf86"]
+[gd_scene load_steps=20 format=3 uid="uid://bi1tkwbdupf86"]
 
 [ext_resource type="Script" path="res://level/world.gd" id="1_3rhpl"]
 [ext_resource type="PackedScene" uid="uid://dhf2f1tnnssf1" path="res://player/player.tscn" id="1_6npmn"]
@@ -7,6 +7,9 @@
 [ext_resource type="Theme" uid="uid://7x0wfx7saf0p" path="res://theme.tres" id="4_e8j4p"]
 [ext_resource type="AudioStream" uid="uid://cvcllbsxlxlql" path="res://level/tinitus.mp3" id="4_fshj0"]
 [ext_resource type="Script" path="res://level/end_summary.gd" id="5_vh827"]
+[ext_resource type="AudioStream" uid="uid://doliw8t7ps6uf" path="res://level/8-bit-legends-ancient-shrine-200457.mp3" id="6_2q2pu"]
+[ext_resource type="Script" path="res://level/music.gd" id="7_xqjm0"]
+[ext_resource type="Script" path="res://sound_audio.gd" id="10_awxbi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ucbke"]
 texture = ExtResource("3_fl2ix")
@@ -370,7 +373,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/path = NodePath("../Player/AudioStreamPlayer:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -382,7 +385,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/2/path = NodePath("../Player/AudioStreamPlayer:volume_db")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -425,7 +428,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/path = NodePath("../Player/AudioStreamPlayer:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -437,7 +440,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/2/path = NodePath("../Player/AudioStreamPlayer:volume_db")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -487,7 +490,6 @@ layer_1/tile_data = PackedInt32Array(-655342, 327681, 3, -589806, 327681, 2, -52
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-visible = false
 z_as_relative = false
 material = SubResource("ShaderMaterial_4ksvs")
 anchors_preset = 15
@@ -505,10 +507,11 @@ libraries = {
 }
 autoplay = "intro"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer"]
-stream = ExtResource("4_fshj0")
-volume_db = -10.0
-pitch_scale = 1.00384
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="CanvasLayer"]
+process_mode = 3
+stream = ExtResource("6_2q2pu")
+autoplay = true
+script = ExtResource("7_xqjm0")
 
 [node name="EndSummary" type="PanelContainer" parent="CanvasLayer"]
 visible = false
@@ -594,6 +597,12 @@ text = "Quit"
 trail_length = 100
 gain_speed = 10.0
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("4_fshj0")
+volume_db = -10.0
+pitch_scale = 1.00384
+script = ExtResource("10_awxbi")
+
 [node name="Spawns" type="Node2D" parent="."]
 
 [node name="SpawnLocal" type="Node2D" parent="Spawns" groups=["spawn"]]
@@ -604,6 +613,7 @@ position = Vector2(5436, 525)
 [node name="SpawnLocal3" type="Node2D" parent="Spawns" groups=["spawn"]]
 position = Vector2(7512, 2182)
 
+[connection signal="finished" from="CanvasLayer/AudioStreamPlayer2" to="CanvasLayer/AudioStreamPlayer2" method="play"]
 [connection signal="pressed" from="CanvasLayer/EndSummary/Control/VBoxContainer2/PlayAgain" to="CanvasLayer/EndSummary" method="_on_play_again_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndSummary/Control/VBoxContainer2/MainMenu" to="CanvasLayer/EndSummary" method="_on_main_menu_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndSummary/Control/VBoxContainer2/Quit" to="CanvasLayer/EndSummary" method="_on_quit_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ce2ehy1vh8xxj"]
+[gd_scene load_steps=22 format=3 uid="uid://ce2ehy1vh8xxj"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_15miv"]
 [ext_resource type="Texture2D" uid="uid://dqvcqfx1g3xah" path="res://enemies/assets/basic asset pack/Basic Demon Sprites/Basic Demons 4x.png" id="2_kjhbq"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bg8601dplushu" path="res://enemies/assets/health_bar_under.png" id="6_1a0vv"]
 [ext_resource type="Script" path="res://enemies/player_detector.gd" id="6_j7v70"]
 [ext_resource type="Texture2D" uid="uid://chesawcx5f080" path="res://enemies/assets/health_bar.png" id="7_t2gbt"]
+[ext_resource type="Script" path="res://sound_audio.gd" id="8_77rwb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fuhjg"]
 atlas = ExtResource("2_kjhbq")
@@ -240,6 +241,7 @@ texture_under = ExtResource("6_1a0vv")
 texture_progress = ExtResource("7_t2gbt")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("8_77rwb")
 
 [connection signal="attack" from="." to="ProjectileAttack" method="attack"]
 [connection signal="health_update" from="." to="EnemyHealthBar" method="set_value"]

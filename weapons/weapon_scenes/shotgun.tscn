@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bgo0te0o8psrg"]
+[gd_scene load_steps=15 format=3 uid="uid://bgo0te0o8psrg"]
 
 [ext_resource type="Script" path="res://weapons/weapon.gd" id="1_p870r"]
 [ext_resource type="Texture2D" uid="uid://comojqge77jn4" path="res://weapons/assets/sprites/muzzle_flash.png" id="2_3hieo"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dpesgd0m8kfmb" path="res://weapons/assets/sprites/Shotgun.png" id="4_stkwy"]
 [ext_resource type="AudioStream" uid="uid://crlh5vy2toxly" path="res://weapons/assets/audio/shogun_end.mp3" id="5_1de3e"]
 [ext_resource type="AudioStream" uid="uid://ntqlvqkyen3e" path="res://weapons/assets/audio/shotgun-firing-3-14483.mp3" id="6_etvj2"]
+[ext_resource type="Script" path="res://sound_audio.gd" id="6_obi5k"]
 
 [sub_resource type="Animation" id="Animation_wjcju"]
 length = 0.001
@@ -214,13 +215,16 @@ position = Vector2(27, -4)
 [node name="Reload" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_hq6gf")
 pitch_scale = 1.5
+script = ExtResource("6_obi5k")
 
 [node name="ReloadEnd" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_1de3e")
+script = ExtResource("6_obi5k")
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_etvj2")
 volume_db = -20.0
 pitch_scale = 2.0
+script = ExtResource("6_obi5k")
 
 [connection signal="is_left" from="." to="Sprites/Weapon" method="set_flip_v"]

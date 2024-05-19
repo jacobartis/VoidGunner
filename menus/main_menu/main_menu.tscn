@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b8752hbjbbbqe"]
+[gd_scene load_steps=19 format=3 uid="uid://b8752hbjbbbqe"]
 
 [ext_resource type="Theme" uid="uid://7x0wfx7saf0p" path="res://theme.tres" id="1_2jrpt"]
 [ext_resource type="Script" path="res://menus/main_menu/main_menu.gd" id="1_p72d8"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://ckp5rp8xwvr4s" path="res://menus/main_menu/tutorial_images/Shop.JPG" id="8_j0kdq"]
 [ext_resource type="Script" path="res://menus/main_menu/easter_egg.gd" id="10_eqndm"]
 [ext_resource type="Texture2D" uid="uid://bk4cbiskpheoj" path="res://menus/main_menu/tutorial_images/Spell.png" id="10_u14lc"]
+[ext_resource type="AudioStream" uid="uid://dlhupfboug1ka" path="res://menus/main_menu/8-bit-halloween-story-166454.mp3" id="11_7yiao"]
+[ext_resource type="Script" path="res://level/music.gd" id="12_brad5"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ovxpb"]
 frequency = 0.0445
@@ -144,7 +146,12 @@ nexus, Potion assets
 dive game studio, Demon and human sprites
 [u]Sound[/u]
 Pixabay sound effects
-
+Antipoden Writer, 8 Bit Legends - Ancient Shrine
+Moodmode, 8-bit Halloween Story
+Denis-Pavlov-Music, Relaxing Jazz Podcast Coffee Shop Music
+[u]Playtesters[/u]
+Mikhaeel Zaabar
+Mathew Brindle
 My entry for the Godot Wild Jam #69, thank you to the GWJ team for hosing this event!
 [/center]"
 
@@ -154,6 +161,7 @@ size_flags_horizontal = 4
 text = "     Close     "
 
 [node name="Tutorial" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -288,6 +296,12 @@ offset_bottom = 92.0
 bbcode_enabled = true
 text = "[wave][rainbow][font_size=64]Hello :)"
 
+[node name="MusicAudio" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("11_7yiao")
+autoplay = true
+script = ExtResource("12_brad5")
+
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_credits_pressed"]
@@ -296,3 +310,4 @@ text = "[wave][rainbow][font_size=64]Hello :)"
 [connection signal="pressed" from="Credits/VBoxContainer/Button" to="Credits" method="hide"]
 [connection signal="pressed" from="Tutorial/VBoxContainer/CloseTutorialButton" to="." method="_on_close_tutorial_button_pressed"]
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[connection signal="finished" from="MusicAudio" to="MusicAudio" method="play"]

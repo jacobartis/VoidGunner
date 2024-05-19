@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d2oqy10nn17id"]
+[gd_scene load_steps=26 format=3 uid="uid://d2oqy10nn17id"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_qoc65"]
 [ext_resource type="Texture2D" uid="uid://dqvcqfx1g3xah" path="res://enemies/assets/basic asset pack/Basic Demon Sprites/Basic Demons 4x.png" id="2_xti5i"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://btwmqdm5ibxaq" path="res://enemies/assets/audio/deep-monster-growl-86780.mp3" id="9_kl5h2"]
 [ext_resource type="Script" path="res://enemies/enemy_pasive_audio.gd" id="10_schag"]
 [ext_resource type="AudioStream" uid="uid://bic424e0osltk" path="res://enemies/assets/audio/sword-sound-2-36274.mp3" id="11_f1xhx"]
+[ext_resource type="Script" path="res://sound_audio.gd" id="12_x4amd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fuhjg"]
 atlas = ExtResource("2_xti5i")
@@ -279,6 +280,7 @@ randomness = 2.0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_f1xhx")
+script = ExtResource("12_x4amd")
 
 [connection signal="attack" from="." to="ProjectileAttack" method="attack"]
 [connection signal="attack" from="." to="DashAttack" method="attack"]

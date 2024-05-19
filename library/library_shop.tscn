@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://80cqroifpud1"]
+[gd_scene load_steps=24 format=3 uid="uid://80cqroifpud1"]
 
 [ext_resource type="Script" path="res://library/shop_controller.gd" id="1_6ur0b"]
 [ext_resource type="Texture2D" uid="uid://td2qsqwgw86x" path="res://library/assets/Table.png" id="2_npnin"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://0esm2uqto816" path="res://menus/player_invent/player_stats.tscn" id="5_ksyr0"]
 [ext_resource type="Theme" uid="uid://7x0wfx7saf0p" path="res://theme.tres" id="5_uu57f"]
 [ext_resource type="Texture2D" uid="uid://bhi5vsf03e2o1" path="res://library/assets/background.jpg" id="9_fvkwe"]
+[ext_resource type="AudioStream" uid="uid://dpy31vtmxrc7b" path="res://library/relaxing-jazz-podcast-coffee-shop-music-192283.mp3" id="12_5300i"]
+[ext_resource type="Script" path="res://level/music.gd" id="13_7ysm2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_txc57"]
 font_size = 64
@@ -258,7 +260,6 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-visible = false
 z_as_relative = false
 material = SubResource("ShaderMaterial_6qx3u")
 anchors_preset = 15
@@ -437,6 +438,12 @@ item_type = 2
 override_rarity = true
 override_value = 1
 
+[node name="MusicAudio" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("12_5300i")
+autoplay = true
+script = ExtResource("13_7ysm2")
+
 [connection signal="item_selected" from="." to="CanvasLayer/ItemDisplay/PanelContainer" method="update_stats"]
 [connection signal="pressed" from="CanvasLayer/BuyButton" to="." method="on_buy_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/QuitButton" to="." method="on_quit_button_pressed"]
@@ -457,3 +464,4 @@ override_value = 1
 [connection signal="item_selected" from="ItemSpawns/WeaponItemSpawn" to="." method="on_item_selected"]
 [connection signal="item_selected" from="ItemSpawns/WeaponItemSpawn2" to="." method="on_item_selected"]
 [connection signal="item_selected" from="ItemSpawns/WeaponItemSpawn3" to="." method="on_item_selected"]
+[connection signal="finished" from="MusicAudio" to="MusicAudio" method="play"]

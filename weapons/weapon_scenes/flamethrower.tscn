@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cgf30mlopngcq"]
+[gd_scene load_steps=18 format=3 uid="uid://cgf30mlopngcq"]
 
 [ext_resource type="Script" path="res://weapons/weapon.gd" id="1_pyw7j"]
 [ext_resource type="PackedScene" uid="uid://dorqm15osdl1o" path="res://projectiles/fire.tscn" id="2_robdf"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" path="res://weapons/shimer.gdshader" id="4_3ojpy"]
 [ext_resource type="AudioStream" uid="uid://ck15gwnjt4re4" path="res://weapons/assets/audio/flamethrower_end.mp3" id="5_4yyx3"]
 [ext_resource type="Texture2D" uid="uid://drnojoerecyvf" path="res://weapons/assets/sprites/flamethrower.png" id="5_h4xd6"]
+[ext_resource type="Script" path="res://sound_audio.gd" id="6_qhpnk"]
 [ext_resource type="AudioStream" uid="uid://2ujpfac2esyx" path="res://weapons/assets/audio/flamethower.mp3" id="7_l0mx0"]
 
 [sub_resource type="Curve" id="Curve_lhv24"]
@@ -229,13 +230,16 @@ position = Vector2(9, -1)
 stream = SubResource("AudioStreamMP3_rbgrf")
 volume_db = -10.0
 pitch_scale = 1.5
+script = ExtResource("6_qhpnk")
 
 [node name="ReloadEnd" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_4yyx3")
+script = ExtResource("6_qhpnk")
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_l0mx0")
 volume_db = -10.0
 pitch_scale = 2.0
+script = ExtResource("6_qhpnk")
 
 [connection signal="is_left" from="." to="Sprites/Weapon" method="set_flip_v"]

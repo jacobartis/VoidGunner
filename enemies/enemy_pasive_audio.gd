@@ -1,10 +1,11 @@
-extends AudioStreamPlayer2D
+extends SoundAudio
 class_name PasiveAudio
 
 @export var delay: float = 0
 @export var randomness: float = 0
 
 func _ready():
+	super()
 	finished.connect(start_audio)
 	start_audio()
 
